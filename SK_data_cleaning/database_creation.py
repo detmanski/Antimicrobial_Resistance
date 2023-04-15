@@ -29,6 +29,9 @@ class Countries(Base):
     id = Column(Integer, primary_key=True)
     region_id = Column(Integer, ForeignKey("regions.id"))
     country = Column(String)
+    country_code = Column(String)
+    latitude = Column(Float)
+    longitude = Column(Float)
 
 # Health spending
 class Spending_pop(Base):
@@ -97,7 +100,19 @@ session.commit()
 with open(f"{filepath}/data_csv/countries.csv", 'r') as csvfile:
     countries = csv.DictReader(csvfile)
     for row in countries:
-        country_data = Countries(id=row['id'], region_id=row['region_id'], country=row['country'])
+        country_data = Countries()
+        if row['id']:
+            country_data.id=row['id'] 
+        if row['region_id']:
+            country_data.region_id=row['region_id'] 
+        if row['country']:
+            country_data.country=row['country']
+        if row['country_code']:
+            country_data.country_code=row['country_code']
+        if row['latitude']:
+            country_data.latitude=row['latitude']
+        if row['longitude']:
+            country_data.longitude=row['longitude']
         session.add(country_data)
 
 # Update the database

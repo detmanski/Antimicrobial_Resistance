@@ -18,6 +18,9 @@ class Countries(Base):
     id = Column(Integer, primary_key=True)
     region_id = Column(Integer, ForeignKey("regions.id"))
     country = Column(String(50))
+    country_code = Column(String(2))
+    latitude = Column(Float)
+    longitude = Column(Float)
 
 # Health spending
 class Spending_pop(Base):
