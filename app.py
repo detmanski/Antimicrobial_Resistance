@@ -8,6 +8,8 @@ from sqlalchemy.ext.automap import automap_base
 
 from flask import Flask, jsonify
 
+from flask_cors import CORS
+
 #################################################
 # Database Setup
 #################################################
@@ -34,6 +36,7 @@ AMR_data = Base.classes.amr_data
 #################################################
 
 app = Flask(__name__)
+CORS(app)
 
 #################################################
 # Flask Routes
@@ -514,7 +517,7 @@ def pathogen_filter(pathogen):
         data_dict['age_group_name'] = row[2]
         data_dict['infectious_syndrome'] = row[3]
         data_dict['pathogen'] = row[4]
-        data_dict['antibioti_class'] = row[5]
+        data_dict['antibiotic_class'] = row[5]
         data_dict['val'] = row[6]
         data_dict['upper'] = row[7]
         data_dict['lower'] = row[8]
@@ -557,7 +560,7 @@ def measure_filter(measure):
         data_dict['age_group_name'] = row[2]
         data_dict['infectious_syndrome'] = row[3]
         data_dict['pathogen'] = row[4]
-        data_dict['antibioti_class'] = row[5]
+        data_dict['antibiotic_class'] = row[5]
         data_dict['val'] = row[6]
         data_dict['upper'] = row[7]
         data_dict['lower'] = row[8]
@@ -600,7 +603,7 @@ def location_filter(location):
         data_dict['age_group_name'] = row[2]
         data_dict['infectious_syndrome'] = row[3]
         data_dict['pathogen'] = row[4]
-        data_dict['antibioti_class'] = row[5]
+        data_dict['antibiotic_class'] = row[5]
         data_dict['val'] = row[6]
         data_dict['upper'] = row[7]
         data_dict['lower'] = row[8]
@@ -643,7 +646,7 @@ def counterfactual_filter(counterfactual):
         data_dict['age_group_name'] = row[2]
         data_dict['infectious_syndrome'] = row[3]
         data_dict['pathogen'] = row[4]
-        data_dict['antibioti_class'] = row[5]
+        data_dict['antibiotic_class'] = row[5]
         data_dict['val'] = row[6]
         data_dict['upper'] = row[7]
         data_dict['lower'] = row[8]
@@ -686,7 +689,7 @@ def syndrome_filter(infectious_syndrome):
         data_dict['age_group_name'] = row[2]
         data_dict['infectious_syndrome'] = row[3]
         data_dict['pathogen'] = row[4]
-        data_dict['antibioti_class'] = row[5]
+        data_dict['antibiotic_class'] = row[5]
         data_dict['val'] = row[6]
         data_dict['upper'] = row[7]
         data_dict['lower'] = row[8]
@@ -729,7 +732,7 @@ def antibiotic_class_filter(antibiotic_class):
         data_dict['age_group_name'] = row[2]
         data_dict['infectious_syndrome'] = row[3]
         data_dict['pathogen'] = row[4]
-        data_dict['antibioti_class'] = row[5]
+        data_dict['antibiotic_class'] = row[5]
         data_dict['val'] = row[6]
         data_dict['upper'] = row[7]
         data_dict['lower'] = row[8]
@@ -772,7 +775,7 @@ def age_filter(age_group_name):
         data_dict['age_group_name'] = row[2]
         data_dict['infectious_syndrome'] = row[3]
         data_dict['pathogen'] = row[4]
-        data_dict['antibioti_class'] = row[5]
+        data_dict['antibiotic_class'] = row[5]
         data_dict['val'] = row[6]
         data_dict['upper'] = row[7]
         data_dict['lower'] = row[8]
