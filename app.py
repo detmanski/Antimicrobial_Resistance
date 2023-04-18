@@ -74,8 +74,8 @@ def home():
             f"• Returns a list of all AMR infectious syndromes; for potential use in dropdown creation<br/>"
             f"/api/v1.0/amr/antibiotic_classes<br/>"
             f"• Returns a list of all AMR antibiotic classes; for potential use in dropdown creation<br/>"
-            f"/api/v1.0/amr/(pathogen or measure or location or counterfactual or infectious syndrome or antibiotic class or age group)<br/>"
-            f"• Returns filtered data by whatever is input of the items noted above<br/>"
+            f"/api/v1.0/amr/(pathogen or location or infectious syndrome or antibiotic class)<br/>"
+            f"• Returns filtered data by whatever is input of the items noted above, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
             f"/api/v1.0/spending/year_list<br/>"
             f"• Returns a list of years for which there's data on health spending and population; for potential use in dropdown creation<br/>"
             f"/api/v1.0/spending/year<br/>"
@@ -492,9 +492,7 @@ def pathogen_filter(pathogen):
 
     # Query the database
     filtered_data = session.query(
-            AMR_data.measure_name,
             AMR_data.location_name,
-            AMR_data.age_group_name,
             AMR_data.infectious_syndrome,
             AMR_data.pathogen,
             AMR_data.antibiotic_class,
@@ -502,7 +500,10 @@ def pathogen_filter(pathogen):
             AMR_data.upper,
             AMR_data.lower
         ).filter(
-            AMR_data.pathogen == pathogen
+            AMR_data.pathogen == pathogen,
+            AMR_data.age_group_name == "All Ages",
+            AMR_data.measure_name == "Deaths",
+            AMR_data.counterfactual == "Drug-susceptible infection"
         ).all()
     
     # close the session
@@ -512,15 +513,13 @@ def pathogen_filter(pathogen):
     formatted = []
     for row in filtered_data:
         data_dict = {}
-        data_dict['measure_name'] = row[0]
-        data_dict['location_name'] = row[1]
-        data_dict['age_group_name'] = row[2]
-        data_dict['infectious_syndrome'] = row[3]
-        data_dict['pathogen'] = row[4]
-        data_dict['antibiotic_class'] = row[5]
-        data_dict['val'] = row[6]
-        data_dict['upper'] = row[7]
-        data_dict['lower'] = row[8]
+        data_dict['location_name'] = row[0]
+        data_dict['infectious_syndrome'] = row[1]
+        data_dict['pathogen'] = row[2]
+        data_dict['antibiotic_class'] = row[3]
+        data_dict['val'] = row[4]
+        data_dict['upper'] = row[5]
+        data_dict['lower'] = row[6]
         formatted.append(data_dict)
 
     # Jsonify and return data
@@ -578,9 +577,7 @@ def location_filter(location):
 
     # Query the database
     filtered_data = session.query(
-            AMR_data.measure_name,
             AMR_data.location_name,
-            AMR_data.age_group_name,
             AMR_data.infectious_syndrome,
             AMR_data.pathogen,
             AMR_data.antibiotic_class,
@@ -588,7 +585,10 @@ def location_filter(location):
             AMR_data.upper,
             AMR_data.lower
         ).filter(
-            AMR_data.location_name == location
+            AMR_data.location_name == location,
+            AMR_data.age_group_name == "All Ages",
+            AMR_data.measure_name == "Deaths",
+            AMR_data.counterfactual == "Drug-susceptible infection"
         ).all()
     
     # close the session
@@ -598,15 +598,13 @@ def location_filter(location):
     formatted = []
     for row in filtered_data:
         data_dict = {}
-        data_dict['measure_name'] = row[0]
-        data_dict['location_name'] = row[1]
-        data_dict['age_group_name'] = row[2]
-        data_dict['infectious_syndrome'] = row[3]
-        data_dict['pathogen'] = row[4]
-        data_dict['antibiotic_class'] = row[5]
-        data_dict['val'] = row[6]
-        data_dict['upper'] = row[7]
-        data_dict['lower'] = row[8]
+        data_dict['location_name'] = row[0]
+        data_dict['infectious_syndrome'] = row[1]
+        data_dict['pathogen'] = row[2]
+        data_dict['antibiotic_class'] = row[3]
+        data_dict['val'] = row[4]
+        data_dict['upper'] = row[5]
+        data_dict['lower'] = row[6]
         formatted.append(data_dict)
 
     # Jsonify and return data
@@ -664,9 +662,7 @@ def syndrome_filter(infectious_syndrome):
 
     # Query the database
     filtered_data = session.query(
-            AMR_data.measure_name,
             AMR_data.location_name,
-            AMR_data.age_group_name,
             AMR_data.infectious_syndrome,
             AMR_data.pathogen,
             AMR_data.antibiotic_class,
@@ -674,7 +670,10 @@ def syndrome_filter(infectious_syndrome):
             AMR_data.upper,
             AMR_data.lower
         ).filter(
-            AMR_data.infectious_syndrome == infectious_syndrome
+            AMR_data.infectious_syndrome == infectious_syndrome,
+            AMR_data.age_group_name == "All Ages",
+            AMR_data.measure_name == "Deaths",
+            AMR_data.counterfactual == "Drug-susceptible infection"
         ).all()
     
     # close the session
@@ -684,15 +683,13 @@ def syndrome_filter(infectious_syndrome):
     formatted = []
     for row in filtered_data:
         data_dict = {}
-        data_dict['measure_name'] = row[0]
-        data_dict['location_name'] = row[1]
-        data_dict['age_group_name'] = row[2]
-        data_dict['infectious_syndrome'] = row[3]
-        data_dict['pathogen'] = row[4]
-        data_dict['antibiotic_class'] = row[5]
-        data_dict['val'] = row[6]
-        data_dict['upper'] = row[7]
-        data_dict['lower'] = row[8]
+        data_dict['location_name'] = row[0]
+        data_dict['infectious_syndrome'] = row[1]
+        data_dict['pathogen'] = row[2]
+        data_dict['antibiotic_class'] = row[3]
+        data_dict['val'] = row[4]
+        data_dict['upper'] = row[5]
+        data_dict['lower'] = row[6]
         formatted.append(data_dict)
 
     # Jsonify and return data
@@ -707,9 +704,7 @@ def antibiotic_class_filter(antibiotic_class):
 
     # Query the database
     filtered_data = session.query(
-            AMR_data.measure_name,
             AMR_data.location_name,
-            AMR_data.age_group_name,
             AMR_data.infectious_syndrome,
             AMR_data.pathogen,
             AMR_data.antibiotic_class,
@@ -717,7 +712,10 @@ def antibiotic_class_filter(antibiotic_class):
             AMR_data.upper,
             AMR_data.lower
         ).filter(
-            AMR_data.antibiotic_class == antibiotic_class
+            AMR_data.antibiotic_class == antibiotic_class,
+            AMR_data.age_group_name == "All Ages",
+            AMR_data.measure_name == "Deaths",
+            AMR_data.counterfactual == "Drug-susceptible infection"
         ).all()
     
     # close the session
@@ -727,15 +725,13 @@ def antibiotic_class_filter(antibiotic_class):
     formatted = []
     for row in filtered_data:
         data_dict = {}
-        data_dict['measure_name'] = row[0]
-        data_dict['location_name'] = row[1]
-        data_dict['age_group_name'] = row[2]
-        data_dict['infectious_syndrome'] = row[3]
-        data_dict['pathogen'] = row[4]
-        data_dict['antibiotic_class'] = row[5]
-        data_dict['val'] = row[6]
-        data_dict['upper'] = row[7]
-        data_dict['lower'] = row[8]
+        data_dict['location_name'] = row[0]
+        data_dict['infectious_syndrome'] = row[1]
+        data_dict['pathogen'] = row[2]
+        data_dict['antibiotic_class'] = row[3]
+        data_dict['val'] = row[4]
+        data_dict['upper'] = row[5]
+        data_dict['lower'] = row[6]
         formatted.append(data_dict)
 
     # Jsonify and return data
