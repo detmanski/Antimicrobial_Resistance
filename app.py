@@ -53,7 +53,7 @@ def home():
             f"/api/v1.0/countries<br/>"
             f"• Returns all countries with ids, latitude, and longitude in JSON format without filters<br/>"
             f"/api/v1.0/regions<br/>"
-            f"• Returns all regions with ids in JSON format without filters<br/>"
+            f"• Returns all regions with ids in JSON format without filters; aggregate regions have been removed<br/>"
             f"/api/v1.0/spending<br/>"
             f"• Returns all spending population data in JSON format without filters<br/>"
             f"/api/v1.0/amr<br/>"
@@ -62,15 +62,13 @@ def home():
             f"• Returns a list of countries that are part of the input region; can use with /api/v1.0/amr/locations endpoint to specify a region<br/>"
             f"/api/v1.0/amr/pathogens<br/>"
             f"• Returns a list of all available pathogens, including total; for potential use in dropdown creation<br/>"
-            f"/api/v1.0/amr/locations<br/>"
-            f"• Returns a list of all AMR regions by name; for potential use in dropdown creation<br/>"
             f"/api/v1.0/amr/infectious_syndromes<br/>"
             f"• Returns a list of all AMR infectious syndromes; for potential use in dropdown creation<br/>"
             f"/api/v1.0/amr/antibiotic_classes<br/>"
             f"• Returns a list of all AMR antibiotic classes; for potential use in dropdown creation<br/>"
             f"/api/v1.0/amr/pathogen/(pathogen)<br/>"
             f"• Returns filtered data by pathogen, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
-            f"/api/v1.0/amr/location/(location)<br/>"
+            f"/api/v1.0/amr/region/(region)<br/>"
             f"• Returns filtered data by location, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
             f"/api/v1.0/amr/infectious_syndrome/(infectious syndrome)<br/>"
             f"• Returns filtered data by infectious syndrome, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
@@ -83,8 +81,10 @@ def home():
             f"• Note: any datapoints without a defined region are omitted<br/>"
             f"• Note: the default year should be 2019, since this is the year all of the AMR data is from<br/>"
             f"/api/v1.0/spending/start_year/end_year<br/>"
-            f"• Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends - grouped by region; for possible graph creation and changing<br/>"
+            f"• Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends - grouped by region<br/>"
             f"• Note: any datapoints without a defined region are omitted<br/>"
+            f"/api/v1.0/spending/spending_change/(start_year)/(end_year)"
+            f"• Returns spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change normalized by number of years - grouped by region<br/>"
             f"<br/>"
             f"Sources are as follows:<br/>"
             f"The AMR dataset and analysis come from 'Global burden of bacterial antimicrobial resistance in 2012: a systematic analysis<br/>"
@@ -356,27 +356,6 @@ def pathogen_list():
     # Jsonify data and return it
     return jsonify(pathogens_list)
 
-@app.route("/api/v1.0/amr/locations")
-def location_list():
-    print("The locations list endpoint has been accessed")
-
-    # Start a session
-    session = Session(engine)
-
-    # Query the database to get all unique locations
-    locations = session.query(AMR_data.location_name).distinct().all()
-
-    # Close the session
-    session.close()
-
-    # Formats the data 
-    locations_list = []
-    for item in locations:
-        locations_list.append(item[0])
-
-    # Jsonify data and return it
-    return jsonify(locations_list)
-
 @app.route("/api/v1.0/amr/infectious_syndromes")
 def syndrome_list():
     print("The infectious syndrome list endpoint has been accessed")
@@ -462,7 +441,7 @@ def pathogen_filter(pathogen):
     # Jsonify and return data
     return jsonify(formatted)
 
-@app.route("/api/v1.0/amr/location/<location>")
+@app.route("/api/v1.0/amr/region/<region>")
 def location_filter(location):
     print(f"location {location} filter has been viewed")
 
@@ -721,6 +700,67 @@ def year_range_data(start_year, end_year):
 
     # Jsonify data and return it
     return jsonify(data_formatted)
+
+@app.route("/api/v1.0/spending/spending_change/<start_year>/<end_year>")
+def spending_change(start_year, end_year):
+    print(f"Spending change data has been accessed for {start_year} through {end_year}")
+
+    # Start a session
+    session = Session(engine)
+
+    # Query the database to get all spending and population data for start year, grouped by region 
+    start_year_data = session.query(
+        SpendingPop.region_id,
+        Regions.region,
+        SpendingPop.year,
+        func.sum(SpendingPop.health_spending_mil_USD),
+        func.sum(SpendingPop.population_thousands), 
+        func.sum(SpendingPop.health_spending_mil_USD)/(func.sum(SpendingPop.population_thousands)/1000)
+        ).filter(
+        SpendingPop.year == start_year
+        ).join(Regions).group_by(SpendingPop.region_id).all()
+
+    # Query the database to get all spending and population data for end year, grouped by region 
+    end_year_data = session.query(
+        SpendingPop.region_id,
+        Regions.region,
+        SpendingPop.year,
+        func.sum(SpendingPop.health_spending_mil_USD),
+        func.sum(SpendingPop.population_thousands), 
+        func.sum(SpendingPop.health_spending_mil_USD)/(func.sum(SpendingPop.population_thousands)/1000)
+        ).filter(
+        SpendingPop.year == end_year
+        ).join(Regions).group_by(SpendingPop.region_id).all()
+
+    # Query the database to get a list of all regions, excluding aggregates 
+    regions_data = session.query(Regions).all()
+
+    # Close the session
+    session.close()
+
+    ## Calculate the compound annual growth rate
+    # Calculate the periods over which change is being calculated
+    timespan = end_year - start_year
+    # Put regions into a list to loop through 
+    regions = []
+    for row in regions_data:
+        regions.append(row.region)
+    # Calculate the compound annual growth rate in USD per capita
+    cagr = []
+    for region in regions:
+        temp_dict = {}
+        temp_dict['region'] = region
+        for row in start_year_data:
+            if row.region == region:
+                start_spending = row[5]
+        for row in end_year_data:
+            if row.region == region:
+                end_spending = row[5]
+        temp_dict['compound_annual_growth_rate'] = (((end_spending/start_spending)**(1/timespan))-1)*100
+        cagr.append(temp_dict)
+
+    # Jsonify data and return it
+    return jsonify(cagr)
 
 #################################################
 # Run the App
