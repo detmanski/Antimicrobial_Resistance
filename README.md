@@ -27,3 +27,43 @@ The aim of our project is to visualize patterns and tends in AMR across differen
 **@Group - This section can be populated once the visualizations are finished, with answers to the questions posed above**
 
 ## Flask Endpoints and Instructions
+The Flask API is set up to return JSONs of filtered sections of the datasets. It is set up with CORS, such that it can be programmatically accessed via JavaScript code. In order to run the Flask API, the database must be available at the filepath specified in the "app.py" file. Endpoints are as follows:
+* "/api/v1.0/alldata" 
+    * Returns all data in the database
+    * NOTE: This is a lot of data and may take time, time out, or otherwise result in errors
+* "/api/v1.0/countries"
+    * Returns all countries with ids, latitude, and longitude in JSON format without filters
+* "/api/v1.0/regions"
+    * Returns all regions with ids in JSON format without filters
+* "/api/v1.0/spending"
+    * Returns all spending population data in JSON format without filters
+* "/api/v1.0/amr"
+    * Returns all AMR data in JSON format without filters
+    * NOTE: This is a very large dataset and using this endpoint may result in errors
+* "/api/v1.0/countries/region"
+    * Returns a list of countries that are part of the input region
+* "/api/v1.0/amr/pathogens"
+    * Returns a list of all available pathogens, including total
+* "/api/v1.0/amr/locations"
+    * Returns a list of all AMR regions by name
+* "/api/v1.0/amr/infectious_syndromes"
+    * Returns a list of all AMR infectious syndromes
+* "/api/v1.0/amr/antibiotic_classes"
+    * Returns a list of all AMR antibiotic classes
+* "/api/v1.0/amr/pathogen/(pathogen)"
+    * Returns filtered data by pathogen, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection
+* "/api/v1.0/amr/location/(location)"
+    * Returns filtered data by location, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection
+* "/api/v1.0/amr/infectious_syndrome/(infectious syndrome)"
+    * Returns filtered data by infectious syndrome, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection
+* "/api/v1.0/amr/antibiotic_class/(antibiotic class)"
+    * Returns filtered data by antibiotic class, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection
+* "/api/v1.0/spending/year_list"
+    * Returns a list of years for which there's data on health spending and population
+* "/api/v1.0/spending/(year)"
+    * Returns spending and population data for one year - takes an input of a year, should be 4 digits, and returns data for that year - grouped by region
+    * Note: any datapoints without a defined region are omitted
+    * Note: the default year is be 2019, since this is the year all of the AMR data is from
+* "/api/v1.0/spending/start_year/end_year"
+    * Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends - grouped by region; for possible graph creation and changing
+    * Note: any datapoints without a defined region are omitted
