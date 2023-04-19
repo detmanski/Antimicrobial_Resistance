@@ -656,9 +656,9 @@ let countries =  [
           "id": 81, 
           "region_id": 19, 
           "country": "South Sudan", 
-          "country_code": null, 
-          "latitude": null, 
-          "longitude": null
+          "country_code": "SSu", 
+          "latitude": 6.8770, 
+          "longitude": 31.3070
       }, 
       {
           "id": 82, 
@@ -696,9 +696,9 @@ let countries =  [
           "id": 86, 
           "region_id": 7, 
           "country": "Brunei Darussalam", 
-          "country_code": null, 
-          "latitude": null, 
-          "longitude": null
+          "country_code": "BDA", 
+          "latitude": 4.5353, 
+          "longitude": 114.7277
       }, 
       {
           "id": 87, 
@@ -840,9 +840,9 @@ let countries =  [
           "id": 104, 
           "region_id": 16, 
           "country": "Palestine", 
-          "country_code": null, 
-          "latitude": null, 
-          "longitude": null
+          "country_code": "PAL", 
+          "latitude": 31.9522, 
+          "longitude": 35.2332
       }, 
       {
           "id": 105, 
@@ -1192,9 +1192,9 @@ let countries =  [
           "id": 148, 
           "region_id": 20, 
           "country": "Eswatini", 
-          "country_code": null, 
-          "latitude": null, 
-          "longitude": null
+          "country_code": "EW", 
+          "latitude": 26.5225, 
+          "longitude": 31.4659
       }, 
       {
           "id": 149, 
@@ -1208,7 +1208,7 @@ let countries =  [
           "id": 150, 
           "region_id": 20, 
           "country": "Namibia", 
-          "country_code": null, 
+          "country_code": "NB", 
           "latitude": -22.957639999999998, 
           "longitude": 18.49041
       }, 
@@ -1496,9 +1496,9 @@ let countries =  [
           "id": 186, 
           "region_id": 21, 
           "country": "Cabo Verde", 
-          "country_code": null, 
-          "latitude": null, 
-          "longitude": null
+          "country_code": "CBV", 
+          "latitude": 16.5388, 
+          "longitude": 23.0418
       }, 
       {
           "id": 187, 
@@ -1600,9 +1600,9 @@ let countries =  [
           "id": 199, 
           "region_id": 21, 
           "country": "Sao Tome and Principe", 
-          "country_code": null, 
-          "latitude": null, 
-          "longitude": null
+          "country_code": "STP", 
+          "latitude": 0.1864, 
+          "longitude": 6.6131
       }, 
       {
           "id": 200, 
@@ -1631,9 +1631,10 @@ let countries =  [
   ]
 ;
 
+
 // Define a markerSize() function that will give each country a different radius based on its region id.
-function markerSize(countries) {
-  return Math.sqrt(region_id) * 50;
+function markerSize(country_code) {
+  return Math.sqrt(country) * 50;
 };
 
 // Add markers for each country
@@ -1642,9 +1643,15 @@ for (var i = 0; i < countries.length; i++) {
   var marker = L.marker([country.latitude, country.longitude]).addTo(myMap);
   marker.bindPopup(country.country)};
 
+  const regionId = country.region_id;
+  if (typeof regionId !== 'undefined') {
+    // do something with regionId
+  }
+  
+
 // Conditionals for country regions
 var color = ""; 
-    if (countries[i].region_id > 15) {
+    if (country.region_id > 15) {
 color = "yellow";
 }
     else if (countries[i].region_id > 9) {
@@ -1656,3 +1663,5 @@ color = "green";
     else {
 color = "violet";
 };
+
+ 
