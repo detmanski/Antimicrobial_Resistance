@@ -1,5 +1,12 @@
 # Project_3
 
+# Table of Contents
+* [Overview](#overview)
+* [Data Sources](#data-sources)
+* [Limitations](#limitations)
+* [Analysis and Conclusions](#analysis-and-conclusions)
+* [Flask Endpoints and Instructions](#flask-endpoints-and-instructions)
+
 ## Overview
 
 We decided to examine and graph data published on the global burden of antimicrobial resistance (AMR). 
@@ -18,3 +25,5 @@ The aim of our project is to visualize patterns and tends in AMR across differen
 
 ## Analysis and Conclusions
 **@Group - This section can be populated once the visualizations are finished, with answers to the questions posed above**
+
+## Flask Endpoints and Instructions
