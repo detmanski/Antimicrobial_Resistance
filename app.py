@@ -62,20 +62,20 @@ def home():
             f"• Returns a list of countries that are part of the input region; can use with /api/v1.0/amr/locations endpoint to specify a region<br/>"
             f"/api/v1.0/amr/pathogens<br/>"
             f"• Returns a list of all available pathogens, including total; for potential use in dropdown creation<br/>"
-            f"/api/v1.0/amr/measures<br/>"
-            f"• Returns a list of all tested measures; for potential use in dropdown creation<br/>"
             f"/api/v1.0/amr/locations<br/>"
             f"• Returns a list of all AMR regions by name; for potential use in dropdown creation<br/>"
-            f"/api/v1.0/amr/counterfactuals<br/>"
-            f"• Returns a list of all AMR counterfactuals; for potential use in dropdown creation<br/>"
-            f"/api/v1.0/amr/ages<br/>"
-            f"• Returns a list of all AMR ages; for potential use in dropdown creation<br/>"
             f"/api/v1.0/amr/infectious_syndromes<br/>"
             f"• Returns a list of all AMR infectious syndromes; for potential use in dropdown creation<br/>"
             f"/api/v1.0/amr/antibiotic_classes<br/>"
             f"• Returns a list of all AMR antibiotic classes; for potential use in dropdown creation<br/>"
-            f"/api/v1.0/amr/(pathogen or location or infectious syndrome or antibiotic class)<br/>"
-            f"• Returns filtered data by whatever is input of the items noted above, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
+            f"/api/v1.0/amr/pathogen/(pathogen)<br/>"
+            f"• Returns filtered data by pathogen, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
+            f"/api/v1.0/amr/location/(location)<br/>"
+            f"• Returns filtered data by location, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
+            f"/api/v1.0/amr/infectious_syndrome/(infectious syndrome)<br/>"
+            f"• Returns filtered data by infectious syndrome, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
+            f"/api/v1.0/amr/antibiotic_class/(antibiotic class)<br/>"
+            f"• Returns filtered data by antibiotic class, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
             f"/api/v1.0/spending/year_list<br/>"
             f"• Returns a list of years for which there's data on health spending and population; for potential use in dropdown creation<br/>"
             f"/api/v1.0/spending/year<br/>"
@@ -355,27 +355,6 @@ def pathogen_list():
 
     # Jsonify data and return it
     return jsonify(pathogens_list)
-    
-@app.route("/api/v1.0/amr/measures")
-def measure_list():
-    print("The measures list endpoint has been accessed")
-
-    # Start a session
-    session = Session(engine)
-
-    # Query the database to get all unique measures
-    measures = session.query(AMR_data.measure_name).distinct().all()
-
-    # Close the session
-    session.close()
-
-    # Formats the data 
-    measures_list = []
-    for item in measures:
-        measures_list.append(item[0])
-
-    # Jsonify data and return it
-    return jsonify(measures_list)
 
 @app.route("/api/v1.0/amr/locations")
 def location_list():
@@ -397,48 +376,6 @@ def location_list():
 
     # Jsonify data and return it
     return jsonify(locations_list)
-
-@app.route("/api/v1.0/amr/counterfactuals")
-def counterfactual_list():
-    print("The counterfactuals list endpoint has been accessed")
-
-    # Start a session
-    session = Session(engine)
-
-    # Query the database to get all unique counterfactuals
-    counterfactuals = session.query(AMR_data.counterfactual).distinct().all()
-
-    # Close the session
-    session.close()
-
-    # Formats the data 
-    counterfactuals_list = []
-    for item in counterfactuals:
-        counterfactuals_list.append(item[0])
-
-    # Jsonify data and return it
-    return jsonify(counterfactuals_list)
-
-@app.route("/api/v1.0/amr/ages")
-def age_list():
-    print("The age list endpoint has been accessed")
-
-    # Start a session
-    session = Session(engine)
-
-    # Query the database to get all unique counterfactuals
-    ages = session.query(AMR_data.age_group_name).distinct().all()
-
-    # Close the session
-    session.close()
-
-    # Formats the data 
-    ages_list = []
-    for item in ages:
-        ages_list.append(item[0])
-
-    # Jsonify data and return it
-    return jsonify(ages_list)
 
 @app.route("/api/v1.0/amr/infectious_syndromes")
 def syndrome_list():
@@ -483,7 +420,7 @@ def antibiotic_list():
     return jsonify(antibiotics_list)
 
 # ( or  or  or  or   or antibiotic class or age group)
-@app.route("/api/v1.0/amr/<pathogen>")
+@app.route("/api/v1.0/amr/pathogen/<pathogen>")
 def pathogen_filter(pathogen):
     print(f"Pathogen {pathogen} filter has been viewed")
 
@@ -525,50 +462,7 @@ def pathogen_filter(pathogen):
     # Jsonify and return data
     return jsonify(formatted)
 
-@app.route("/api/v1.0/amr/<measure>")
-def measure_filter(measure):
-    print(f"Measure {measure} filter has been viewed")
-
-    # Start a session
-    session = Session(engine)
-
-    # Query the database
-    filtered_data = session.query(
-            AMR_data.measure_name,
-            AMR_data.location_name,
-            AMR_data.age_group_name,
-            AMR_data.infectious_syndrome,
-            AMR_data.pathogen,
-            AMR_data.antibiotic_class,
-            AMR_data.val,
-            AMR_data.upper,
-            AMR_data.lower
-        ).filter(
-            AMR_data.measure_name == measure
-        ).all()
-    
-    # close the session
-    session.close()
-
-    # Format the data
-    formatted = []
-    for row in filtered_data:
-        data_dict = {}
-        data_dict['measure_name'] = row[0]
-        data_dict['location_name'] = row[1]
-        data_dict['age_group_name'] = row[2]
-        data_dict['infectious_syndrome'] = row[3]
-        data_dict['pathogen'] = row[4]
-        data_dict['antibiotic_class'] = row[5]
-        data_dict['val'] = row[6]
-        data_dict['upper'] = row[7]
-        data_dict['lower'] = row[8]
-        formatted.append(data_dict)
-
-    # Jsonify and return data
-    return jsonify(formatted)
-
-@app.route("/api/v1.0/amr/<location>")
+@app.route("/api/v1.0/amr/location/<location>")
 def location_filter(location):
     print(f"location {location} filter has been viewed")
 
@@ -610,50 +504,7 @@ def location_filter(location):
     # Jsonify and return data
     return jsonify(formatted)
 
-@app.route("/api/v1.0/amr/<counterfactual>")
-def counterfactual_filter(counterfactual):
-    print(f"counterfactual {counterfactual} filter has been viewed")
-
-    # Start a session
-    session = Session(engine)
-
-    # Query the database
-    filtered_data = session.query(
-            AMR_data.measure_name,
-            AMR_data.location_name,
-            AMR_data.age_group_name,
-            AMR_data.infectious_syndrome,
-            AMR_data.pathogen,
-            AMR_data.antibiotic_class,
-            AMR_data.val,
-            AMR_data.upper,
-            AMR_data.lower
-        ).filter(
-            AMR_data.counterfactual == counterfactual
-        ).all()
-    
-    # close the session
-    session.close()
-
-    # Format the data
-    formatted = []
-    for row in filtered_data:
-        data_dict = {}
-        data_dict['measure_name'] = row[0]
-        data_dict['location_name'] = row[1]
-        data_dict['age_group_name'] = row[2]
-        data_dict['infectious_syndrome'] = row[3]
-        data_dict['pathogen'] = row[4]
-        data_dict['antibiotic_class'] = row[5]
-        data_dict['val'] = row[6]
-        data_dict['upper'] = row[7]
-        data_dict['lower'] = row[8]
-        formatted.append(data_dict)
-
-    # Jsonify and return data
-    return jsonify(formatted)
-
-@app.route("/api/v1.0/amr/<infectious_syndrome>")
+@app.route("/api/v1.0/amr/infectious_syndrome/<infectious_syndrome>")
 def syndrome_filter(infectious_syndrome):
     print(f"infectious_syndrome {infectious_syndrome} filter has been viewed")
 
@@ -695,7 +546,7 @@ def syndrome_filter(infectious_syndrome):
     # Jsonify and return data
     return jsonify(formatted)
 
-@app.route("/api/v1.0/amr/<antibiotic_class>")
+@app.route("/api/v1.0/amr/antibiotic_class/<antibiotic_class>")
 def antibiotic_class_filter(antibiotic_class):
     print(f"antibiotic_class {antibiotic_class} filter has been viewed")
 
