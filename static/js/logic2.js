@@ -23,6 +23,8 @@ function updateChart() {
         const url21 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Staphylococcus aureus').then(response => response.json());
         const url22 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Streptococcus pneumoniae').then(response => response.json());
         const url23 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Neisseria gonorrhoeae').then(response => response.json());
+
+        
         
         Promise.all([url, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16,
         url17, url18, url19, url20, url21, url22, url23]).then(([datapoints, datapoints2, datapoints3, datapoints4, datapoints5,
@@ -57,9 +59,29 @@ function updateChart() {
         console.log(acinetobacterBaumanii, citrobacterSpp, enterobacterSpp, enetrococcusFaecalis, enterococcusFaecium, escherichiaColi, 
             groupAStreptococcus, groupBStreptococcus, haemophilusInfluenzae, klebsiellaPneumoniae, morganellaSpp, mycobacteriumTuberculosis, 
             nonTyphoidalSalmonella, otherEnterococci, proteusSpp, pseudomonasAeruginosa, salmonellaParatyphi, salmonellaTyphi, serratiaSpp, shigellaSpp,
-            staphylococcusAureus, streptococcusPneumoniae, neisseriaGonorrhoeae); 
+            staphylococcusAureus, streptococcusPneumoniae, neisseriaGonorrhoeae, acinetobacterBaumaniiFilter); 
         
-   
+        const antibioticClass = [
+        "Aminoglycosides",
+        "Anti-pseudomonal penicillin/Beta-Lactamase inhibitors",
+        "Beta Lactam/Beta-lactamase inhibitors",
+        "Carbapenems",
+        "Fluoroquinolones",
+        "Fourth-generation cephalosporins",
+        "Resistance to one or more antibiotics",
+        "Third-generation cephalosporins",
+        "Aminopenicillin",
+        "Extensive drug resistance in TB",
+        "Isoniazid mono-resistance",
+        "Macrolide",
+        "Methicillin",
+        "Multi-drug resistance excluding extensive drug resistance in TB",
+        "Multi-drug resistance in Salmonella Typhi and Paratyphi",
+        "Penicillin",
+        "Rifampicin mono-resistance",
+        "Trimethoprim-Sulfamethoxazole",
+        "Vancomycin"]
+                
 
         const pathogens= [
         "Acinetobacter baumannii",
