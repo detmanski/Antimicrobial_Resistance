@@ -40,7 +40,9 @@ The Flask API is set up to return JSONs of filtered sections of the datasets. It
 * "/api/v1.0/amr"
     * Returns all AMR data in JSON format without filters
     * NOTE: This is a very large dataset and using this endpoint may result in errors
-* "/api/v1.0/countries/region"
+* "/api/v1.0/countries/all_regions"
+    * Returns a list of dictionaries with each country and its region
+* "/api/v1.0/countries/(region)"
     * Returns a list of countries that are part of the input region
 * "/api/v1.0/amr/pathogens"
     * Returns a list of all available pathogens, including total
@@ -65,5 +67,7 @@ The Flask API is set up to return JSONs of filtered sections of the datasets. It
     * Note: any datapoints without a defined region are omitted
     * Note: the default year is be 2019, since this is the year all of the AMR data is from
 * "/api/v1.0/spending/start_year/end_year"
-    * Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends - grouped by region; for possible graph creation and changing
+    * Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends and grouped by region
     * Note: any datapoints without a defined region are omitted
+* "/api/v1.0/spending/spending_change/(start_year)/(end_year)"
+    * Returns percent spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change per capita normalized by number of years and grouped by region
