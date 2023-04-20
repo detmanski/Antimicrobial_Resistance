@@ -58,7 +58,9 @@ def home():
             f"• Returns all spending population data in JSON format without filters<br/>"
             f"/api/v1.0/amr<br/>"
             f"• Returns all AMR data in JSON format without filters<br/>"
-            f"/api/v1.0/countries/region<br/>"
+            f"/api/v1.0/countries/all_regions<br/>"
+            f"• Returns a list of dictionaries with each country and its region<br/>"
+            f"/api/v1.0/countries/(region)<br/>"
             f"• Returns a list of countries that are part of the input region; can use with /api/v1.0/amr/locations endpoint to specify a region<br/>"
             f"/api/v1.0/amr/pathogens<br/>"
             f"• Returns a list of all available pathogens, including total; for potential use in dropdown creation<br/>"
@@ -313,6 +315,30 @@ def amr_data():
 
     # Jsonify data and return it
     return jsonify(amr) 
+
+@app.route("/api/v1.0/countries/all_regions")
+def countries_with_region():
+    print(f"The list of countries with region names has been accessed")
+
+    # Start a session
+    session = Session(engine)
+
+    # Query the database to get all countries in the specified region
+    countries_by_region = session.query(Countries.country, Regions.region).join(Regions).all()
+
+    # Close the session
+    session.close()
+
+    # Format the data
+    countries = []
+    for item in countries_by_region:
+        temp_dict = {}
+        temp_dict['country'] = item[0]
+        temp_dict['region'] = item[1]
+        countries.append(temp_dict)
+
+    # Jsonify data and return it
+    return jsonify(countries)
 
 @app.route("/api/v1.0/countries/<region>")
 def countries_per_region(region):
