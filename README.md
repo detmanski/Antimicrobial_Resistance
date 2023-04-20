@@ -40,7 +40,9 @@ The Flask API is set up to return JSONs of filtered sections of the datasets. It
 * "/api/v1.0/amr"
     * Returns all AMR data in JSON format without filters
     * NOTE: This is a very large dataset and using this endpoint may result in errors
-* "/api/v1.0/countries/region"
+* "/api/v1.0/countries/all_regions"
+    * Returns a list of dictionaries with each country and its region
+* "/api/v1.0/countries/(region)"
     * Returns a list of countries that are part of the input region
 * "/api/v1.0/amr/pathogens"
     * Returns a list of all available pathogens, including total
