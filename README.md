@@ -68,4 +68,4 @@ The Flask API is set up to return JSONs of filtered sections of the datasets. It
     * Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends and grouped by region
     * Note: any datapoints without a defined region are omitted
 * "/api/v1.0/spending/spending_change/(start_year)/(end_year)"
-    * Returns spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change normalized by number of years and grouped by region
+    * Returns percent spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change per capita normalized by number of years and grouped by region
