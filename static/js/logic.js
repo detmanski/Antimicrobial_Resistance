@@ -298,19 +298,19 @@ async function init() {
   const deathAttributed = []
 
 }
-
-
-
-
 const ctx = document.getElementById('myChart');
-ctx.addEventListener('change', init);
-function dropDown() {
-  console.log(ctx.options[ctx.selectedIndex].text);
-  console.log(ctx.text());
-  myChart.data.datasets[0].data = ctx.value.split(',');
-  myChart.update();
-}
-
+function init() {
+  var dropDown = d3.select("#selDataset");
+  d3.json(url).then(function(trace1) {
+      var classesNames = trace1.names; 
+      classesNames.forEach((antibioticClass)=> {
+          dropDown.append("option").text(antibioticClass).property("value", antibioticClass)
+      });
+      var initSample = classesNames[0];
+      buildCharts(initClass);
+     
+  });
+};
 
 
 
@@ -327,14 +327,9 @@ let trace1 = new Chart(ctx, {
               neisseriaGonorrhoeaeFilter],
           borderWidth: 1
         }],
-          [{
-          label: "Number of Deaths by Antibiotic resistance",
-          data: [aminoglycosidesFilter, antipseudomonalPenicillinFilter, betaLactamFilter, carbapenemsFilter, fluoroquinolonesFilter, cephalosporinsFilter,
-          resistanceOneOrMoreFilter, cephalosporins3rdGenFilter, aminopenicillinFilter, resistanceTBFilter, isoniazidResistanceFilter, macrolideFilter,
-        methicillinFilter, multiResistanceExcludingTBFilter, multiResistanceSamonellaFilter, penicillinFilter, rifampicinFilter, trimethoprimSulfamethoxazoleFilter,
-      vancomycinFilter]
-          }],
+
       },
+        
       options: {
         scales: {
           y: {

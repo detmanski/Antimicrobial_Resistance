@@ -19,36 +19,16 @@
           <h5>Deaths attributed to pathogen by region</h5>
           <hr>
           <canvas id="myChart"></canvas>
+          <button onclick="updateChart()">Fetch Now</button>
             <div class="selectBox">
-              <select id="regions">
-                <option value="1">East Asia</option>
-                <option value="2">Southeast Asia</option>
-                <option value="3">Oceania</option>
-                <option value="4">Central Asia</option>
-                <option value="5">Central Europe</option>
-                <option value="6">Eastern Europe</option>
-                <option value="7">High-Income Asia Pacific</option>
-                <option value="8">Australasia</option>
-                <option value="9">Western Europe</option>
-                <option value="10">Southern Latin America</option>
-                <option value="11">High-Income North America</option>
-                <option value="12">Caribbean</option>
-                <option value="13">Andean Latin America</option>
-                <option value="14">Central Latin America</option>
-                <option value="15">Tropical Latin America</option>
-                <option value="16">North Africa and Middle East</option>
-                <option value="17">South Asia</option>
-                <option value="18">Central Sub-Saharan Africa</option>
-                <option value="19">Eastern Sub-Saharan Africa</option>
-                <option value="20">Southern Sub-Saharan Africa</option>
-                <option value="21">Western Sub-Saharan Africa</option>
+              <select id = "selDataset" onchange="optionChanged(this.value)">
               </select>
             </div>
         </div>
       </div>
     </div>
   
-
+ß
     <!-- Optional JavaScript; choose one of the two! -->
 
     <!-- Option 1: Bootstrap Bundle with Popper -->
@@ -63,7 +43,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
 
-    <script type="text/javascript" src="static/js/logic.js"></script>
+    <script type="text/javascript" src="static/js/logic2.js"></script>
 
 
     </script>
