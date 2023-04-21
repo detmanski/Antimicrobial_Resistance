@@ -7,9 +7,26 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="well">
+        <h5>Year:</h5>
+        <select id="years_dropdown" onchange="yearChanged(this.value)">
+        </select>
+    </div>
     <div>
-        <canvas id="myChart"></canvas>
-    </div>    
+        <canvas id="spending_by_year"></canvas>
+    </div>
+    <div class="well">
+        <h5>Start Year:</h5>
+        <select id="comp_start_years_dropdown" onchange="startYearChanged(this.value)">
+        </select>
+    </div>
+    <div class="well">
+        <h5>End Year: 2019</h5>
+    </div>
+    <div>
+        <canvas id="amr_vs_spending_change"></canvas>
+    </div> 
+
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
