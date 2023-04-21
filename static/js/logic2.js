@@ -23,16 +23,39 @@ function updateChart() {
         const url21 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Staphylococcus aureus').then(response => response.json());
         const url22 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Streptococcus pneumoniae').then(response => response.json());
         const url23 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Neisseria gonorrhoeae').then(response => response.json());
-
-        
+        const url24 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Aminoglycosides').then(response => response.json());
+        const url25 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Anti-pseudomonal penicillin Beta-Lactamase inhibitors').then(response => response.json());
+        const url26 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Beta Lactam Beta-lactamase inhibitors').then(response => response.json());
+        const url27 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Carbapenems').then(response => response.json());
+        const url28 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Fluoroquinolones').then(response => response.json());
+        const url29 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Fourth-generation cephalosporins').then(response => response.json());
+        const url30 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Resistance to one or more antibiotics').then(response => response.json());
+        const url31 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Third-generation cephalosporins').then(response => response.json());
+        const url32 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Aminopenicillin').then(response => response.json());
+        const url33 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Extensive drug resistance in TB').then(response => response.json());
+        const url34 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Isoniazid mono-resistance').then(response => response.json());
+        const url35 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Macrolide').then(response => response.json());
+        const url36 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Methicillin').then(response => response.json());
+        const url37 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Multi-drug resistance excluding extensive drug resistance in TB').then(response => response.json());
+        const url38 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Multi-drug resistance in Salmonella Typhi and Paratyphi').then(response => response.json());
+        const url39 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Penicillin').then(response => response.json());
+        const url40 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Rifampicin mono-resistance').then(response => response.json());
+        const url41 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Trimethoprim-Sulfamethoxazole').then(response => response.json());
+        const url42 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Vancomycin').then(response => response.json()); 
         
         Promise.all([url, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16,
-        url17, url18, url19, url20, url21, url22, url23]).then(([datapoints, datapoints2, datapoints3, datapoints4, datapoints5,
+        url17, url18, url19, url20, url21, url22, url23, url24, url25, url26, url27, url28, url29, url30, url31, url32, url33, 
+        url34, url35, url36, url37, url38, url39, url40, url41, url42]).then(([datapoints, datapoints2, datapoints3, datapoints4, datapoints5,
         datapoints6, datapoints7, datapoints8, datapoints9, datapoints10, datapoints11, datapoints12, datapoints13, datapoints14,
-        datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22, datapoints23]) => {
+        datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22, datapoints23,
+        datapoints24, datapoints25, datapoints26, datapoints27, datapoints28, datapoints29, datapoints30, datapoints31, datapoints32,
+        datapoints33, datapoints34, datapoints35, datapoints36, datapoints37, datapoints38, datapoints39, datapoints40, datapoints41,
+        datapoints42]) => {
         console.log(datapoints, datapoints2, datapoints3,datapoints4, datapoints5,
             datapoints6, datapoints7, datapoints8, datapoints9, datapoints10, datapoints11, datapoints12, datapoints13, datapoints14,
-            datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22, datapoints23); 
+            datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22, datapoints23,
+            datapoints24, datapoints25, datapoints26, datapoints27, datapoints28, datapoints29, datapoints30, datapoints31, datapoints32, datapoints33,
+            datapoints34, datapoints35, datapoints36, datapoints37, datapoints38, datapoints39, datapoints40, datapoints41); 
         const acinetobacterBaumanii = Object.keys(datapoints).length;
         const citrobacterSpp = Object.keys(datapoints2).length;
         const enterobacterSpp = Object.keys(datapoints3).length;
@@ -56,10 +79,31 @@ function updateChart() {
         const staphylococcusAureus = Object.keys(datapoints21).length;
         const streptococcusPneumoniae = Object.keys(datapoints22).length;
         const neisseriaGonorrhoeae = Object.keys(datapoints23).length;
+        const aminoglycosides = Object.keys(datapoints24).length;
+        const antipseudomonalPenicillin = Object.keys(datapoints25).length;
+        const betaLactam = Object.keys(datapoints26).length;
+        const carbapenems = Object.keys(datapoints27).length;
+        const fluoroquinolones = Object.keys(datapoints28).length;
+        const cephalosporins = Object.keys(datapoints29).length;
+        const resistanceOneOrMore = Object.keys(datapoints30).length;
+        const cephalosporins3rdGen = Object.keys(datapoints31).length;
+        const aminopenicillin = Object.keys(datapoints32).length;
+        const resistanceTB = Object.keys(datapoints33).length;
+        const isoniazidResistance = Object.keys(datapoints34).length;
+        const macrolide = Object.keys(datapoints35).length;
+        const methicillin = Object.keys(datapoints36).length;
+        const multiResistanceExcludingTB = Object.keys(datapoints37).length;
+        const multiResistanceSamonella = Object.keys(datapoints38).length;
+        const penicillin = Object.keys(datapoints39).length;
+        const rifampicin = Object.keys(datapoints40).length;
+        const trimethoprimSulfamethoxazole = Object.keys(datapoints41).length;
+        const vancomycin = Object.keys(datapoints42).length;
         console.log(acinetobacterBaumanii, citrobacterSpp, enterobacterSpp, enetrococcusFaecalis, enterococcusFaecium, escherichiaColi, 
             groupAStreptococcus, groupBStreptococcus, haemophilusInfluenzae, klebsiellaPneumoniae, morganellaSpp, mycobacteriumTuberculosis, 
             nonTyphoidalSalmonella, otherEnterococci, proteusSpp, pseudomonasAeruginosa, salmonellaParatyphi, salmonellaTyphi, serratiaSpp, shigellaSpp,
-            staphylococcusAureus, streptococcusPneumoniae, neisseriaGonorrhoeae, acinetobacterBaumaniiFilter); 
+            staphylococcusAureus, streptococcusPneumoniae, neisseriaGonorrhoeae, aminoglycosides, antipseudomonalPenicillin, betaLactam, carbapenems,
+            fluoroquinolones, cephalosporins, resistanceOneOrMore, cephalosporins3rdGen, aminopenicillin, resistanceTB,isoniazidResistance, macrolide,
+            methicillin, multiResistanceExcludingTB, multiResistanceSamonella, penicillin, rifampicin, trimethoprimSulfamethoxazole, vancomycin); 
         
         const antibioticClass = [
         "Aminoglycosides",
