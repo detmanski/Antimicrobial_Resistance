@@ -11,7 +11,7 @@
 
 We decided to examine and graph data published on the global burden of antimicrobial resistance (AMR). 
 
-The aim of our project is to visualize patterns and tends in AMR across different parts of the world as published in Charani et. al. We would like to show via interactive charts which bactria is the most prevalent in terms of drug resistance, what are the global regions most affected by AMR, whether the AMR burden correlates at all to the amount spent on health in a given region.
+The aim of our project is to visualize patterns and tends in AMR across different parts of the world as published in Charani et. al. We would like to show via interactive charts which bacteria is the most prevalent in terms of drug resistance, what are the global regions most affected by AMR, whether the AMR burden correlates at all to the amount spent on health in a given region.
 
 ## Data Sources
 * The AMR data was sourced from the publication "Global burden of antimicrobial resistance: essential pieces of a global puzzle" by Charani et al published in The Lancet (https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(22)00935-7/fulltext). 
