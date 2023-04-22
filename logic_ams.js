@@ -1632,36 +1632,117 @@ let countries =  [
 ;
 
 
-// Define a markerSize() function that will give each country a different radius based on its region id.
-function markerSize(country_code) {
-  return Math.sqrt(country) * 50;
-};
+var regions = [
+    {
+        "id": 1, 
+        "region": "East Asia"
+    }, 
+    {
+        "id": 2, 
+        "region": "Southeast Asia"
+    }, 
+    {
+        "id": 3, 
+        "region": "Oceania"
+    }, 
+    {
+        "id": 4, 
+        "region": "Central Asia"
+    }, 
+    {
+        "id": 5, 
+        "region": "Central Europe"
+    }, 
+    {
+        "id": 6, 
+        "region": "Eastern Europe"
+    }, 
+    {
+        "id": 7, 
+        "region": "High-income Asia Pacific"
+    }, 
+    {
+        "id": 8, 
+        "region": "Australasia"
+    }, 
+    {
+        "id": 9, 
+        "region": "Western Europe"
+    }, 
+    {
+        "id": 10, 
+        "region": "Southern Latin America"
+    }, 
+    {
+        "id": 11, 
+        "region": "High-income North America"
+    }, 
+    {
+        "id": 12, 
+        "region": "Caribbean"
+    }, 
+    {
+        "id": 13, 
+        "region": "Andean Latin America"
+    }, 
+    {
+        "id": 14, 
+        "region": "Central Latin America"
+    }, 
+    {
+        "id": 15, 
+        "region": "Tropical Latin America"
+    }, 
+    {
+        "id": 16, 
+        "region": "North Africa and Middle East"
+    }, 
+    {
+        "id": 17, 
+        "region": "South Asia"
+    }, 
+    {
+        "id": 18, 
+        "region": "Central Sub-Saharan Africa"
+    }, 
+    {
+        "id": 19, 
+        "region": "Eastern Sub-Saharan Africa"
+    }, 
+    {
+        "id": 20, 
+        "region": "Southern Sub-Saharan Africa"
+    }, 
+    {
+        "id": 21, 
+        "region": "Western Sub-Saharan Africa"
+    }
+]
+;
+
+
+function getRegionName(country) {
+    function regionMatch(region) {
+        var id = region.id;
+        return id == this; 
+    }    
+
+    var region_id = country.region_id;
+    var matching_region = regions.filter(regionMatch, region_id)[0];
+    var region_name = matching_region.region;
+    return region_name;
+}
+
 
 // Add markers for each country
 for (var i = 0; i < countries.length; i++) {
   var country = countries[i];
+  var region_name = getRegionName(country);
+
   var marker = L.marker([country.latitude, country.longitude]).addTo(myMap);
-  marker.bindPopup(country.country)};
+  marker.bindPopup(
+    `<h1>${country.country}</h1><hr><h3>Region ${region_name}</h3>`
+).addTo(myMap)}
 
-  const regionId = country.region_id;
-  if (typeof regionId !== 'undefined') {
-    // do something with regionId
-  }
+
   
-
-// Conditionals for country regions
-var color = ""; 
-    if (country.region_id > 15) {
-color = "yellow";
-}
-    else if (countries[i].region_id > 9) {
-color = "blue";
-}
-    else if (countries[i].region_id > 5) {
-color = "green";
-}
-    else {
-color = "violet";
-};
-
- 
