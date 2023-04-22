@@ -1,7 +1,7 @@
 # Project_3
 
 ### Project Proposal
-We have decided to choose the topic of the healthcare industry to explore one of the major threats to the worldwide human health focusing on the analysis of the bacterial antimicrobial resistance (AMR). The aim of our project is to uncover patterns and tends in AMR across different parts of the world. The goals of undertaken this project are to answer some important questions related to AMR. We would like to demonstrate which bactria is the most prevalent in terms of drug resistance, what are the global regions most affected by AMR, and which germs are the most frequently found as well as have the worst symptoms.
+We have decided to choose the topic of the healthcare industry to explore one of the major threats to the worldwide human health focusing on the analysis of the bacterial antimicrobial resistance (AMR). The aim of our project is to uncover patterns and tends in AMR across different parts of the world. The goals of undertaken this project are to answer some important questions related to AMR. We would like to demonstrate which bacteria is the most prevalent in terms of drug resistance, what are the global regions most affected by AMR, and which germs are the most frequently found as well as have the worst symptoms.
 
 Data set:
 https://www.thelancet.com/action/showPdf?pii=S0140-6736%2821%2902724-0
@@ -56,3 +56,11 @@ The Flask API is set up to return JSONs of filtered sections of the datasets. It
     * Note: any datapoints without a defined region are omitted
 * "/api/v1.0/spending/spending_change/(start_year)/(end_year)"
     * Returns percent spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change per capita normalized by number of years and grouped by region
+    *## Project_3 team members:
+
+<h2>Credits:</h2>
+This project was made by the jointed efforts of a team of collaborators listed below:
+<ol>Sarah Kronheim  - https://www.linkedin.com/in/sarah-kronheim-019404137/
+<ol>Brenda Wardhaugh - https://www.linkedin.com/in/brendawardhaugh/
+<ol>Dianne Etmanski  - https://www.linkedin.com/in/dianne-etmanski-b37541b2/
+<ol>Anabel Scaranelo - https://linkedin.com/in/anabel-scaranelo-md-phd-fsbi-6b3598144
