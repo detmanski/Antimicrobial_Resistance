@@ -76,6 +76,8 @@ def home():
             f"• Returns filtered data by infectious syndrome, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
             f"/api/v1.0/amr/antibiotic_class/(antibiotic class)<br/>"
             f"• Returns filtered data by antibiotic class, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
+            f"/api/v1.0/amr/three_filters/(pathogen)/(infectious_syndrome)/(antibiotic_class)<br/>"
+            f"• Returns AMR data for each region filtered by pathogen, infectious syndrome, and antibiotic class, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
             f"/api/v1.0/spending/year_list<br/>"
             f"• Returns a list of years for which there's data on health spending and population; for potential use in dropdown creation<br/>"
             f"/api/v1.0/spending/year<br/>"
@@ -593,26 +595,26 @@ def antibiotic_class_filter(antibiotic_class):
     # Jsonify and return data
     return jsonify(formatted)
 
-@app.route("/api/v1.0/amr/<age_group_name>")
-def age_filter(age_group_name):
-    print(f"age_group_name {age_group_name} filter has been viewed")
+@app.route("/api/v1.0/amr/three_filters/<pathogen>/<infectious_syndrome>/<antibiotic_class>")
+def amr_three_filters(pathogen, infectious_syndrome, antibiotic_class):
+    print(f"filtered AMR data has been viewed")
 
     # Start a session
     session = Session(engine)
 
     # Query the database
     filtered_data = session.query(
-            AMR_data.measure_name,
             AMR_data.location_name,
-            AMR_data.age_group_name,
-            AMR_data.infectious_syndrome,
-            AMR_data.pathogen,
-            AMR_data.antibiotic_class,
             AMR_data.val,
             AMR_data.upper,
             AMR_data.lower
         ).filter(
-            AMR_data.age_group_name == age_group_name
+            AMR_data.antibiotic_class == antibiotic_class,
+            AMR_data.infectious_syndrome == infectious_syndrome,
+            AMR_data.pathogen == pathogen,
+            AMR_data.age_group_name == "All Ages",
+            AMR_data.measure_name == "Deaths",
+            AMR_data.counterfactual == "Drug-susceptible infection"
         ).all()
     
     # close the session
@@ -622,15 +624,10 @@ def age_filter(age_group_name):
     formatted = []
     for row in filtered_data:
         data_dict = {}
-        data_dict['measure_name'] = row[0]
-        data_dict['location_name'] = row[1]
-        data_dict['age_group_name'] = row[2]
-        data_dict['infectious_syndrome'] = row[3]
-        data_dict['pathogen'] = row[4]
-        data_dict['antibiotic_class'] = row[5]
-        data_dict['val'] = row[6]
-        data_dict['upper'] = row[7]
-        data_dict['lower'] = row[8]
+        data_dict['location_name'] = row[0]
+        data_dict['val'] = row[1]
+        data_dict['upper'] = row[2]
+        data_dict['lower'] = row[3]
         formatted.append(data_dict)
 
     # Jsonify and return data
