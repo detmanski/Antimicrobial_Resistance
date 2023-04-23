@@ -20,7 +20,7 @@
           <hr>
           <canvas id="myChart"></canvas>
             <div class="selectBox">
-                <select id = "selDataset">
+                <select id = "selDataset" onchange= "updateChart(this.value)">
                     <option value= "">Please Select an Option</option>
                     <option value ="0">Pathogens</option>
                     <option value ="1">Antibiotic Class</option>
