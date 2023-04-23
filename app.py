@@ -84,8 +84,8 @@ def home():
             f"• Returns spending and population data for one year - takes an input of a year, should be 4 digits, and returns data for that year - grouped by region; for graph creation and changing<br/>"
             f"• Note: any datapoints without a defined region are omitted<br/>"
             f"• Note: the default year should be 2019, since this is the year all of the AMR data is from<br/>"
-            f"/api/v1.0/spending/start_year/end_year<br/>"
-            f"• Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends - grouped by region<br/>"
+            f"/api/v1.0/spending/(start_year)/(end_year)<br/>"
+            f"• Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends<br/>"
             f"• Note: any datapoints without a defined region are omitted<br/>"
             f"/api/v1.0/spending/spending_change/(start_year)/(end_year)"
             f"• Returns percent spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change per capita normalized by number of years - grouped by region<br/>"
@@ -461,7 +461,7 @@ def pathogen_filter(pathogen):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]
+        data_dict['val'] = row[4]*100000
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -503,7 +503,7 @@ def location_filter(location):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]
+        data_dict['val'] = row[4]*100000
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -545,7 +545,7 @@ def syndrome_filter(infectious_syndrome):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]
+        data_dict['val'] = row[4]*100000
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -587,7 +587,7 @@ def antibiotic_class_filter(antibiotic_class):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]
+        data_dict['val'] = row[4]*100000
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -609,7 +609,7 @@ def amr_three_filters(pathogen, infectious_syndrome, antibiotic_class):
             AMR_data.upper,
             AMR_data.lower
         ).filter(
-            AMR_data.antibiotic_class == antibiotic_class,
+            AMR_data.antibiotic_class == antibiotic_class.replace("_", "/"),
             AMR_data.infectious_syndrome == infectious_syndrome,
             AMR_data.pathogen == pathogen,
             AMR_data.age_group_name == "All Ages",
@@ -625,7 +625,7 @@ def amr_three_filters(pathogen, infectious_syndrome, antibiotic_class):
     for row in filtered_data:
         data_dict = {}
         data_dict['location_name'] = row[0]
-        data_dict['val'] = row[1]
+        data_dict['val'] = row[1]*100000
         data_dict['upper'] = row[2]
         data_dict['lower'] = row[3]
         formatted.append(data_dict)
@@ -664,7 +664,6 @@ def one_year_data(year):
     # Query the database to get all spending and population data for a year, grouped by region
     spending_pop_data = session.query(
         SpendingPop.region_id,
-        SpendingPop.country,
         Regions.region,
         func.sum(SpendingPop.health_spending_mil_USD),
         func.sum(SpendingPop.population_thousands)
@@ -678,10 +677,9 @@ def one_year_data(year):
     for row in spending_pop_data:
         data_dict = {}
         data_dict['region_id'] = row[0]
-        data_dict['country'] = row[1]
-        data_dict['region'] = row[2]
-        data_dict['sum_health_spending_mil_USD'] = row[3]
-        data_dict['sum_population_thousands'] = row[4]
+        data_dict['region'] = row[1]
+        data_dict['sum_health_spending_mil_USD'] = row[2]
+        data_dict['sum_population_thousands'] = row[3]
         data_formatted.append(data_dict)
 
     # Jsonify data and return it
@@ -700,11 +698,11 @@ def year_range_data(start_year, end_year):
         SpendingPop.country,
         Regions.region,
         SpendingPop.year,
-        func.sum(SpendingPop.health_spending_mil_USD),
-        func.sum(SpendingPop.population_thousands)
+        SpendingPop.health_spending_mil_USD,
+        SpendingPop.population_thousands
         ).filter(
         SpendingPop.year >= start_year, SpendingPop.year <= end_year
-        ).join(Regions).group_by(SpendingPop.region_id, SpendingPop.year).all()
+        ).join(Regions).all()
     
     # Close the session
     session.close()
@@ -717,8 +715,8 @@ def year_range_data(start_year, end_year):
         data_dict['country'] = row[1]
         data_dict['region'] = row[2]
         data_dict['year'] = row[3]
-        data_dict['sum_health_spending_mil_USD'] = row[4]
-        data_dict['sum_population_thousands'] = row[5]
+        data_dict['health_spending_mil_USD'] = row[4]
+        data_dict['population_thousands'] = row[5]
         data_formatted.append(data_dict)
 
     # Jsonify data and return it
@@ -763,7 +761,7 @@ def spending_change(start_year, end_year):
 
     ## Calculate the compound annual growth rate
     # Calculate the periods over which change is being calculated
-    timespan = end_year - start_year
+    timespan = int(end_year) - int(start_year)
     # Put regions into a list to loop through 
     regions = []
     for row in regions_data:
