@@ -19,9 +19,12 @@
           <h5>AMR Deaths Worldwide</h5>
           <hr>
           <canvas id="myChart"></canvas>
-          <button onclick="updateChart()">Display Data!</button>
             <div class="selectBox">
-              <select id = "selDataset" onchange="optionChanged(this.value)">
+                <select id = "selDataset">
+                    <option value= "">Please Select an Option</option>
+                    <option value ="0">Pathogens</option>
+                    <option value ="1">Antibiotic Class</option>
+                </select>
               </select>
             </div>
         </div>
