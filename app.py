@@ -15,7 +15,8 @@ from flask_cors import CORS
 #################################################
 # Establishes the base filepath to find the database
 ## NOTE: This will be different for each computer
-filepath = "C:/Users/steve/OneDrive/Desktop/Brenda/15"
+# filepath = "C:/Users/steve/OneDrive/Desktop/Brenda/15"
+filepath = "C:/Users/kronh/OneDrive/Documents/UofTCoding_bootcamp/project_3_data"
 
 # Create engine using the 'amr.sqlite' database file
 engine = create_engine(f"sqlite:///{filepath}/database/amr.sqlite")
