@@ -8,17 +8,17 @@ from sqlalchemy.ext.automap import automap_base
 
 from flask import Flask, jsonify
 
-from flask_cors import CORS
+#from flask_cors import CORS
 
 #################################################
 # Database Setup
 #################################################
 # Establishes the base filepath to find the database
 ## NOTE: This will be different for each computer
-filepath = "C:/Users/steve/OneDrive/Desktop/Brenda/15"
+
 
 # Create engine using the 'amr.sqlite' database file
-engine = create_engine(f"sqlite:///{filepath}/database/amr.sqlite")
+engine = create_engine(f"sqlite:///../../project_data/amr.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
@@ -36,7 +36,7 @@ AMR_data = Base.classes.amr_data
 #################################################
 
 app = Flask(__name__)
-CORS(app)
+#CORS(app)
 
 #################################################
 # Flask Routes
@@ -58,9 +58,7 @@ def home():
             f"• Returns all spending population data in JSON format without filters<br/>"
             f"/api/v1.0/amr<br/>"
             f"• Returns all AMR data in JSON format without filters<br/>"
-            f"/api/v1.0/countries/all_regions<br/>"
-            f"• Returns a list of dictionaries with each country and its region<br/>"
-            f"/api/v1.0/countries/(region)<br/>"
+            f"/api/v1.0/countries/region<br/>"
             f"• Returns a list of countries that are part of the input region; can use with /api/v1.0/amr/locations endpoint to specify a region<br/>"
             f"/api/v1.0/amr/pathogens<br/>"
             f"• Returns a list of all available pathogens, including total; for potential use in dropdown creation<br/>"
@@ -76,19 +74,17 @@ def home():
             f"• Returns filtered data by infectious syndrome, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
             f"/api/v1.0/amr/antibiotic_class/(antibiotic class)<br/>"
             f"• Returns filtered data by antibiotic class, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
-            f"/api/v1.0/amr/three_filters/(pathogen)/(infectious_syndrome)/(antibiotic_class)<br/>"
-            f"• Returns AMR data for each region filtered by pathogen, infectious syndrome, and antibiotic class, for measure=Deaths, age_group=All Ages, and counterfactual=Drug Suceptible Infection<br/>"
             f"/api/v1.0/spending/year_list<br/>"
             f"• Returns a list of years for which there's data on health spending and population; for potential use in dropdown creation<br/>"
             f"/api/v1.0/spending/year<br/>"
             f"• Returns spending and population data for one year - takes an input of a year, should be 4 digits, and returns data for that year - grouped by region; for graph creation and changing<br/>"
             f"• Note: any datapoints without a defined region are omitted<br/>"
             f"• Note: the default year should be 2019, since this is the year all of the AMR data is from<br/>"
-            f"/api/v1.0/spending/(start_year)/(end_year)<br/>"
-            f"• Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends<br/>"
+            f"/api/v1.0/spending/start_year/end_year<br/>"
+            f"• Returns spending and population data for a range of years - takes an input of start and end years, should be 4 digits, and returns data for the years in between, inclusive of the ends - grouped by region<br/>"
             f"• Note: any datapoints without a defined region are omitted<br/>"
             f"/api/v1.0/spending/spending_change/(start_year)/(end_year)"
-            f"• Returns percent spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change per capita normalized by number of years - grouped by region<br/>"
+            f"• Returns spending change per capita over a range of years - takes an input of start and end years, should be 4 digits, and returns percent change normalized by number of years - grouped by region<br/>"
             f"<br/>"
             f"Sources are as follows:<br/>"
             f"The AMR dataset and analysis come from 'Global burden of bacterial antimicrobial resistance in 2012: a systematic analysis<br/>"
@@ -318,30 +314,6 @@ def amr_data():
     # Jsonify data and return it
     return jsonify(amr) 
 
-@app.route("/api/v1.0/countries/all_regions")
-def countries_with_region():
-    print(f"The list of countries with region names has been accessed")
-
-    # Start a session
-    session = Session(engine)
-
-    # Query the database to get all countries in the specified region
-    countries_by_region = session.query(Countries.country, Regions.region).join(Regions).all()
-
-    # Close the session
-    session.close()
-
-    # Format the data
-    countries = []
-    for item in countries_by_region:
-        temp_dict = {}
-        temp_dict['country'] = item[0]
-        temp_dict['region'] = item[1]
-        countries.append(temp_dict)
-
-    # Jsonify data and return it
-    return jsonify(countries)
-
 @app.route("/api/v1.0/countries/<region>")
 def countries_per_region(region):
     print(f"The list of countries in region {region} has been accessed")
@@ -461,7 +433,7 @@ def pathogen_filter(pathogen):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]*100000
+        data_dict['val'] = row[4]
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -503,7 +475,7 @@ def location_filter(location):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]*100000
+        data_dict['val'] = row[4]
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -545,7 +517,7 @@ def syndrome_filter(infectious_syndrome):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]*100000
+        data_dict['val'] = row[4]
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -587,7 +559,7 @@ def antibiotic_class_filter(antibiotic_class):
         data_dict['infectious_syndrome'] = row[1]
         data_dict['pathogen'] = row[2]
         data_dict['antibiotic_class'] = row[3]
-        data_dict['val'] = row[4]*100000
+        data_dict['val'] = row[4]
         data_dict['upper'] = row[5]
         data_dict['lower'] = row[6]
         formatted.append(data_dict)
@@ -595,26 +567,26 @@ def antibiotic_class_filter(antibiotic_class):
     # Jsonify and return data
     return jsonify(formatted)
 
-@app.route("/api/v1.0/amr/three_filters/<pathogen>/<infectious_syndrome>/<antibiotic_class>")
-def amr_three_filters(pathogen, infectious_syndrome, antibiotic_class):
-    print(f"filtered AMR data has been viewed")
+@app.route("/api/v1.0/amr/<age_group_name>")
+def age_filter(age_group_name):
+    print(f"age_group_name {age_group_name} filter has been viewed")
 
     # Start a session
     session = Session(engine)
 
     # Query the database
     filtered_data = session.query(
+            AMR_data.measure_name,
             AMR_data.location_name,
+            AMR_data.age_group_name,
+            AMR_data.infectious_syndrome,
+            AMR_data.pathogen,
+            AMR_data.antibiotic_class,
             AMR_data.val,
             AMR_data.upper,
             AMR_data.lower
         ).filter(
-            AMR_data.antibiotic_class == antibiotic_class.replace("_", "/"),
-            AMR_data.infectious_syndrome == infectious_syndrome,
-            AMR_data.pathogen == pathogen,
-            AMR_data.age_group_name == "All Ages",
-            AMR_data.measure_name == "Deaths",
-            AMR_data.counterfactual == "Drug-susceptible infection"
+            AMR_data.age_group_name == age_group_name
         ).all()
     
     # close the session
@@ -624,10 +596,15 @@ def amr_three_filters(pathogen, infectious_syndrome, antibiotic_class):
     formatted = []
     for row in filtered_data:
         data_dict = {}
-        data_dict['location_name'] = row[0]
-        data_dict['val'] = row[1]*100000
-        data_dict['upper'] = row[2]
-        data_dict['lower'] = row[3]
+        data_dict['measure_name'] = row[0]
+        data_dict['location_name'] = row[1]
+        data_dict['age_group_name'] = row[2]
+        data_dict['infectious_syndrome'] = row[3]
+        data_dict['pathogen'] = row[4]
+        data_dict['antibiotic_class'] = row[5]
+        data_dict['val'] = row[6]
+        data_dict['upper'] = row[7]
+        data_dict['lower'] = row[8]
         formatted.append(data_dict)
 
     # Jsonify and return data
@@ -664,6 +641,7 @@ def one_year_data(year):
     # Query the database to get all spending and population data for a year, grouped by region
     spending_pop_data = session.query(
         SpendingPop.region_id,
+        SpendingPop.country,
         Regions.region,
         func.sum(SpendingPop.health_spending_mil_USD),
         func.sum(SpendingPop.population_thousands)
@@ -677,9 +655,10 @@ def one_year_data(year):
     for row in spending_pop_data:
         data_dict = {}
         data_dict['region_id'] = row[0]
-        data_dict['region'] = row[1]
-        data_dict['sum_health_spending_mil_USD'] = row[2]
-        data_dict['sum_population_thousands'] = row[3]
+        data_dict['country'] = row[1]
+        data_dict['region'] = row[2]
+        data_dict['sum_health_spending_mil_USD'] = row[3]
+        data_dict['sum_population_thousands'] = row[4]
         data_formatted.append(data_dict)
 
     # Jsonify data and return it
@@ -698,11 +677,11 @@ def year_range_data(start_year, end_year):
         SpendingPop.country,
         Regions.region,
         SpendingPop.year,
-        SpendingPop.health_spending_mil_USD,
-        SpendingPop.population_thousands
+        func.sum(SpendingPop.health_spending_mil_USD),
+        func.sum(SpendingPop.population_thousands)
         ).filter(
         SpendingPop.year >= start_year, SpendingPop.year <= end_year
-        ).join(Regions).all()
+        ).join(Regions).group_by(SpendingPop.region_id, SpendingPop.year).all()
     
     # Close the session
     session.close()
@@ -715,8 +694,8 @@ def year_range_data(start_year, end_year):
         data_dict['country'] = row[1]
         data_dict['region'] = row[2]
         data_dict['year'] = row[3]
-        data_dict['health_spending_mil_USD'] = row[4]
-        data_dict['population_thousands'] = row[5]
+        data_dict['sum_health_spending_mil_USD'] = row[4]
+        data_dict['sum_population_thousands'] = row[5]
         data_formatted.append(data_dict)
 
     # Jsonify data and return it
@@ -761,7 +740,7 @@ def spending_change(start_year, end_year):
 
     ## Calculate the compound annual growth rate
     # Calculate the periods over which change is being calculated
-    timespan = int(end_year) - int(start_year)
+    timespan = end_year - start_year
     # Put regions into a list to loop through 
     regions = []
     for row in regions_data:

@@ -79,6 +79,7 @@ body {
   box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.4)
 }
 
+
 /* CSS for footer */
 .footer {
   display: flex;
@@ -89,7 +90,7 @@ body {
 }
 
 .footer .copy {
-  color: #f5f5f5;
+  color: #fff;
 }
 
 .bottom-links {
