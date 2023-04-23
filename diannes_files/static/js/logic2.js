@@ -1,4 +1,4 @@
-
+// Pathogen endpoints
 const url = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Acinetobacter%20baumannii').then(response => response.json());
 const url2 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Citrobacter spp.').then(response => response.json());
 const url3 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Enterobacter spp.').then(response => response.json());
@@ -21,10 +21,15 @@ const url19 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Serratia spp.')
 const url20 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Shigella spp.').then(response => response.json());
 const url21 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Staphylococcus aureus').then(response => response.json());
 const url22 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Streptococcus pneumoniae').then(response => response.json());
-const url23 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Neisseria gonorrhoeae').then(response => response.json());
+//removed endpoint not associated with deaths
+//const url23 = fetch('http://127.0.0.1:5000/api/v1.0/amr/pathogen/Neisseria gonorrhoeae').then(response => response.json());
+
+
+// Antibiotic class endpoints
 const url24 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Aminoglycosides').then(response => response.json());
-const url25 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Anti-pseudomonal penicillin Beta-Lactamase inhibitors').then(response => response.json());
-const url26 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Beta Lactam Beta-lactamase inhibitors').then(response => response.json());
+//removed endpoints not associated with deaths
+//const url25 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Anti-pseudomonal penicillin Beta-Lactamase inhibitors').then(response => response.json());
+//const url26 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Beta Lactam Beta-lactamase inhibitors').then(response => response.json());
 const url27 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Carbapenems').then(response => response.json());
 const url28 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Fluoroquinolones').then(response => response.json());
 const url29 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Fourth-generation cephalosporins').then(response => response.json());
@@ -41,20 +46,44 @@ const url39 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Penicil
 const url40 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Rifampicin mono-resistance').then(response => response.json());
 const url41 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Trimethoprim-Sulfamethoxazole').then(response => response.json());
 const url42 = fetch('http://127.0.0.1:5000/api/v1.0/amr/antibiotic_class/Vancomycin').then(response => response.json()); 
-        
+
+// Infectious Sydrome endpoints
+const url43 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Bacterial infections of the skin and subcutaneous systems').then(response => response.json()); 
+const url44 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Bloodstream infections').then(response => response.json()); 
+const url45 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Diarrhoea').then(response => response.json()); 
+const url46 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Endocarditis and other cardiac infections').then(response => response.json()); 
+const url47 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Infections of bones, joints, and related organs').then(response => response.json()); 
+const url48 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Lower respiratory infections and all related infections in the thorax').then(response => response.json()); 
+const url49 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Meningitis and other bacterial central nervous system infections').then(response => response.json()); 
+const url50 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Peritoneal and intra-abdominal infections').then(response => response.json()); 
+const url51 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Tuberculosis').then(response => response.json()); 
+const url52 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Typhoid%20fever,%20paratyphoid%20fever,%20and%20invasive%20non-typhoidal%20Salmonella').then(response => response.json()); 
+const url53 = fetch('http://127.0.0.1:5000/api/v1.0/amr/infectious_syndrome/Urinary tract infections and pyelonephritis').then(response => response.json()); 
+
+// Creating datapoints(datapoints 23,25,26 removed due to null value)
 Promise.all([url, url2, url3, url4, url5, url6, url7, url8, url9, url10, url11, url12, url13, url14, url15, url16,
-url17, url18, url19, url20, url21, url22, url23, url24, url25, url26, url27, url28, url29, url30, url31, url32, url33, 
-url34, url35, url36, url37, url38, url39, url40, url41, url42]).then(([datapoints, datapoints2, datapoints3, datapoints4, datapoints5,
+url17, url18, url19, url20, url21, url22, url24, url27, url28, url29, url30, url31, url32, url33, 
+url34, url35, url36, url37, url38, url39, url40, url41, url42, url43, url44, url45, url46, url47, url48, url49, url50, url51, url52, url53]).then
+(([datapoints, datapoints2, datapoints3, datapoints4, datapoints5,
 datapoints6, datapoints7, datapoints8, datapoints9, datapoints10, datapoints11, datapoints12, datapoints13, datapoints14,
-datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22, datapoints23,
-datapoints24, datapoints25, datapoints26, datapoints27, datapoints28, datapoints29, datapoints30, datapoints31, datapoints32,
+datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22, 
+datapoints24, datapoints27, datapoints28, datapoints29, datapoints30, datapoints31, datapoints32,
 datapoints33, datapoints34, datapoints35, datapoints36, datapoints37, datapoints38, datapoints39, datapoints40, datapoints41,
-datapoints42]) => {
-console.log(datapoints, datapoints2, datapoints3,datapoints4, datapoints5,
+datapoints42, datapoints43, datapoints44, datapoints45, datapoints46, datapoints47, datapoints48, datapoints49, datapoints50, datapoints51,
+datapoints52, datapoints53]) => {
+
+//printing json endpoints to console for reference
+console.log("Pathogen Datapoints:", datapoints, datapoints2, datapoints3,datapoints4, datapoints5,
             datapoints6, datapoints7, datapoints8, datapoints9, datapoints10, datapoints11, datapoints12, datapoints13, datapoints14,
-            datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22, datapoints23,
-            datapoints24, datapoints25, datapoints26, datapoints27, datapoints28, datapoints29, datapoints30, datapoints31, datapoints32, datapoints33,
-            datapoints34, datapoints35, datapoints36, datapoints37, datapoints38, datapoints39, datapoints40, datapoints41); 
+            datapoints15, datapoints16, datapoints17, datapoints18, datapoints19, datapoints20, datapoints21, datapoints22,
+            datapoints24, datapoints27, datapoints28, datapoints29, datapoints30, datapoints31, datapoints32, datapoints33,
+            datapoints34, datapoints35, datapoints36, datapoints37, datapoints38, datapoints39, datapoints40, datapoints41, datapoints42, 
+            datapoints43, datapoints44, datapoints45, datapoints46, datapoints47, datapoints48, datapoints49, datapoints50, datapoints51,
+            datapoints52, datapoints53); 
+
+//creating constants based on length of dataset(dataset has already been filtered from app.py to only include parameters associated with deaths)
+
+//pathogens
 const acinetobacterBaumanii = Object.keys(datapoints).length;
 const citrobacterSpp = Object.keys(datapoints2).length;
 const enterobacterSpp = Object.keys(datapoints3).length;
@@ -77,10 +106,12 @@ const serratiaSpp = Object.keys(datapoints19).length;
 const shigellaSpp = Object.keys(datapoints20).length;
 const staphylococcusAureus = Object.keys(datapoints21).length;
 const streptococcusPneumoniae = Object.keys(datapoints22).length;
-const neisseriaGonorrhoeae = Object.keys(datapoints23).length;
+//const neisseriaGonorrhoeae = Object.keys(datapoints23).length;
+
+//antibiotic class
 const aminoglycosides = Object.keys(datapoints24).length;
-const antipseudomonalPenicillin = Object.keys(datapoints25).length;
-const betaLactam = Object.keys(datapoints26).length;
+//const antipseudomonalPenicillin = Object.keys(datapoints25).length;
+//const betaLactam = Object.keys(datapoints26).length;
 const carbapenems = Object.keys(datapoints27).length;
 const fluoroquinolones = Object.keys(datapoints28).length;
 const cephalosporins = Object.keys(datapoints29).length;
@@ -97,17 +128,52 @@ const penicillin = Object.keys(datapoints39).length;
 const rifampicin = Object.keys(datapoints40).length;
 const trimethoprimSulfamethoxazole = Object.keys(datapoints41).length;
 const vancomycin = Object.keys(datapoints42).length;
+
+//infectious syndrome
+const skinInfections = Object.keys(datapoints43).length;
+const bloodInfections = Object.keys(datapoints44).length;
+const diarrhoea = Object.keys(datapoints45).length;
+const endocarditis = Object.keys(datapoints46).length;
+const boneInfections = Object.keys(datapoints47).length;
+const lowerRespInfections = Object.keys(datapoints48).length;
+const meningitis = Object.keys(datapoints49).length;
+const peritonealInfections = Object.keys(datapoints50).length;
+const tuberculosis = Object.keys(datapoints51).length;
+const typhoid = Object.keys(datapoints52).length;
+const urinaryInfections = Object.keys(datapoints53).length;
+
+
+
+//printing values to the console
 console.log("pathogen values", acinetobacterBaumanii, citrobacterSpp, enterobacterSpp, enetrococcusFaecalis, enterococcusFaecium, escherichiaColi, 
             groupAStreptococcus, groupBStreptococcus, haemophilusInfluenzae, klebsiellaPneumoniae, morganellaSpp, mycobacteriumTuberculosis, 
             nonTyphoidalSalmonella, otherEnterococci, proteusSpp, pseudomonasAeruginosa, salmonellaParatyphi, salmonellaTyphi, serratiaSpp, shigellaSpp,
-            staphylococcusAureus, streptococcusPneumoniae, neisseriaGonorrhoeae, "antibiotic values", aminoglycosides, antipseudomonalPenicillin, betaLactam, carbapenems,
+            staphylococcusAureus, streptococcusPneumoniae, "antibiotic values", aminoglycosides, carbapenems,
             fluoroquinolones, cephalosporins, resistanceOneOrMore, cephalosporins3rdGen, aminopenicillin, resistanceTB,isoniazidResistance, macrolide,
-            methicillin, multiResistanceExcludingTB, multiResistanceSamonella, penicillin, rifampicin, trimethoprimSulfamethoxazole, vancomycin); 
-        
+            methicillin, multiResistanceExcludingTB, multiResistanceSamonella, penicillin, rifampicin, trimethoprimSulfamethoxazole, vancomycin, "infectious syndromes", 
+            skinInfections, bloodInfections, diarrhoea, endocarditis, boneInfections, lowerRespInfections, meningitis, peritonealInfections, tuberculosis,
+            typhoid, urinaryInfections); 
+
+//lists for plot labels
+
+const infectiousSyndrome = 
+      ["Bacterial infections of the skin and subcutaneous systems",
+      "Bloodstream infections",
+      "Diarrhoea",
+      "Endocarditis and other cardiac infections",
+      "Infections of bones, joints, and related organs",
+      "Lower respiratory infections and all related infections in the thorax",
+      "Meningitis and other bacterial central nervous system infections",
+      "Peritoneal and intra-abdominal infections",
+      "Tuberculosis",
+      "Typhoid fever, paratyphoid fever, and invasive non-typhoidal Salmonella",
+      "Urinary tract infections and pyelonephritis"];
+      //"Gonorrhoea and chlamydia"
+
 const antibioticClass = [
       "Aminoglycosides",
-      "Anti-pseudomonal penicillin/Beta-Lactamase inhibitors",
-      "Beta Lactam/Beta-lactamase inhibitors",
+     // "Anti-pseudomonal penicillin/Beta-Lactamase inhibitors",
+     // "Beta Lactam/Beta-lactamase inhibitors",
       "Carbapenems",
       "Fluoroquinolones",
       "Fourth-generation cephalosporins",
@@ -123,7 +189,7 @@ const antibioticClass = [
       "Penicillin",
       "Rifampicin mono-resistance",
       "Trimethoprim-Sulfamethoxazole",
-      "Vancomycin"]
+      "Vancomycin"];
                 
 
 const pathogens= [
@@ -149,20 +215,24 @@ const pathogens= [
       "Shigella spp.",
       "Staphylococcus aureus",
       "Streptococcus pneumoniae",
-      "Neisseria gonorrhoeae"
-      ]
+     // "Neisseria gonorrhoeae"
+      ];
  
-
+//datasets to plug into plot on change of dropdown
 const dataSet1 = [acinetobacterBaumanii, citrobacterSpp, enterobacterSpp, enetrococcusFaecalis, enterococcusFaecium, escherichiaColi, 
         groupAStreptococcus, groupBStreptococcus, haemophilusInfluenzae, klebsiellaPneumoniae, morganellaSpp, mycobacteriumTuberculosis, 
         nonTyphoidalSalmonella, otherEnterococci, proteusSpp, pseudomonasAeruginosa, salmonellaParatyphi, salmonellaTyphi, serratiaSpp, shigellaSpp,
-        staphylococcusAureus, streptococcusPneumoniae, neisseriaGonorrhoeae]
+        staphylococcusAureus, streptococcusPneumoniae];
 
       
-const dataSet2 = [aminoglycosides, antipseudomonalPenicillin, betaLactam, carbapenems,
+const dataSet2 = [aminoglycosides, carbapenems,
         fluoroquinolones, cephalosporins, resistanceOneOrMore, cephalosporins3rdGen, aminopenicillin, resistanceTB,isoniazidResistance, macrolide,
-        methicillin, multiResistanceExcludingTB, multiResistanceSamonella, penicillin, rifampicin, trimethoprimSulfamethoxazole, vancomycin]
+        methicillin, multiResistanceExcludingTB, multiResistanceSamonella, penicillin, rifampicin, trimethoprimSulfamethoxazole, vancomycin];
 
+const dataSet3 = [skinInfections, bloodInfections, diarrhoea, endocarditis, boneInfections, lowerRespInfections, meningitis, peritonealInfections, tuberculosis,
+        typhoid, urinaryInfections];
+
+// Creating the chart
 async function init() {
 
   const ctx = document.getElementById('myChart');
@@ -186,27 +256,33 @@ async function init() {
               }
             }
           }}); 
-        
-d3.selectAll("#selDataset").on("change", updateChart);    
+
+//connecting js to html dropdown menu
+d3.selectAll("#selDataset").on("change", updateChart);   
 const dropDown = d3.select("#selDataset");
 
+//activating function to update the chart with new values
 function updateChart() {
-  
   let dataset = dropDown.property("value");
- 
   console.log(dataset);
 
   if (dataset === "0") {
     trace1.data.datasets[0].data = dataSet1;
     trace1.data.labels = pathogens;
-    trace1.data.datasets[0].label = "Number of AMR Deaths by Pathogen";
+    trace1.data.datasets[0].label = "Estimated Number of AMR Deaths by Pathogen";
     trace1.update(); 
   }
   else if (dataset === "1") {
     trace1.data.datasets[0].data = dataSet2;
-    trace1.data.datasets[0].label = "Number of AMR Deaths by Antibiotic Class";
+    trace1.data.datasets[0].label = "Estimated Number of AMR Deaths by Antibiotic Class";
     trace1.data.labels = antibioticClass;
     trace1.update();
+  }
+  else if (dataset === "2") {
+    trace1.data.datasets[0].data = dataSet3;
+    trace1.data.datasets[0].label = "Estimated Number of AMR Deaths by Infectious Syndrome";
+    trace1.data.labels = infectiousSyndrome;
+    trace1.update()
   };
   }
 }
