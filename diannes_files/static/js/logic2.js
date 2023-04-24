@@ -268,12 +268,12 @@ function updateChart() {
   if (dataset === "0") {
     trace1.data.datasets[0].data = dataSet1;
     trace1.data.labels = pathogens;
-    trace1.data.datasets[0].label = "Estimated Number of AMR Deaths by Pathogen";
+    trace1.data.datasets[0].label = "Datapoints Associated with AMR Deaths by Pathogen";
     trace1.update(); 
   }
   else if (dataset === "1") {
     trace1.data.datasets[0].data = dataSet2;
-    trace1.data.datasets[0].label = "Estimated Number of AMR Deaths by Antibiotic Class";
+    trace1.data.datasets[0].label = "Datapoints Associated with AMR Deaths by Antibiotic Class";
     trace1.data.labels = antibioticClass;
     trace1.data.datasets[0].backgroundColor = "rgba(245,40,145,0.44)";
     trace1.data.datasets[0].borderColor = "rgba(245,40,145,0.62)";
@@ -281,7 +281,7 @@ function updateChart() {
   }
   else if (dataset === "2") {
     trace1.data.datasets[0].data = dataSet3;
-    trace1.data.datasets[0].label = "Estimated Number of AMR Deaths by Infectious Syndrome";
+    trace1.data.datasets[0].label = "Datapoints Associated with AMR Deaths by Infectious Syndrome";
     trace1.data.labels = infectiousSyndrome;
     trace1.data.datasets[0].backgroundColor = "rgba(245,245,39,0.44";
     trace1.data.datasets[0].borderColor = "rgba(245,245,39,0.62";
