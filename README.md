@@ -13,7 +13,53 @@
 ### Overview and Project Proposal
 We have decided to choose the topic of the healthcare industry to explore one of the major threats to the worldwide human health focusing on the analysis of the bacterial antimicrobial resistance (AMR). We decided to examine and graph data published on the global burden of antimicrobial resistance (AMR) and determine whether the regional AMR burden correlates with regional health spending. 
 
-The aim of our project is to visualize patterns and tends in AMR across different parts of the world as published in Charani et. al. We would like to show via interactive charts which region is the most impacted by resistance to each antibiotic class, what health spending looks like in each region, and whether the AMR burden correlates to the amount spent on healthcare in a given region.
+The aim of our project is to visualize patterns and tends in AMR across different parts of the world as published in Charani et. al. We would like to show via interactive charts which region is the most impacted by resistance to each antibiotic class, what health spending looks like in each region, and whether the AMR burden correlates to the amount spent on healthcare in a given region. We aim to examine the following questions:
+-	Which Pathogens, Antibiotic Classes and Infectious syndromes are associated with death?
+-	Which regions of the world are most at risk and why? 
+-	Does the amount of healthcare spending affect the risk of the population to AMR’s?
+
+
+AAntimicrobial resistance occurs when bacteria evolve to resist antibiotics . These microorganisms can adapt in a way that makes them less vulnerable to the medications that once worked effectively against them. This can happen when certain pathogens are over exposed to antibiotics over time. The drugs become less effective over time, and it becomes harder to treat infections caused by the resistant microorganism. Antimicrobial resistance is a growing and major public health concern, and it can lead to more severe and longer-lasting illnesses, higher healthcare costs/burden, or death. 
+
+Some ways that AMR’s are spread are:
+-contaminated food or water (for example e.coli in lettuce cause by contaminated water sources; staph infections caused by improperly treated water in a spa)
+-direct contact with infectious bodily fluid
+- indirect contact (through touch or droplets)
+-airborne transmission (tuberculosis)
+
+Populations most at risk are: 
+- People living in areas without reliable sources of clean water
+-Pediatric and elderly populations due to underdeveloped or weak immune systems which cannot recover from severe illness 
+-Patients within a healthcare setting: These patients have an extremely high risk and are often immunocompromised. Many people admitted to a healthcare setting display a variety of infectious syndromes and it is extremely important that they are controlled by proper cleaning, precautions and infection control measures. These populations are the most vulnerable
+
+Our aim is to examine the following questions:
+-	Which Pathogens, Antibiotic Classes and Infectious syndromes are associated with death?
+-	Which regions of the world are most at risk and why? 
+-	Does the amount of healthcare spending affect the risk of the population to AMR’s?
+
+
+Which Pathogens, Antibiotic Classes and Infectious syndromes are associated with death?
+
+-	This dataset looked at the datapoints that were associated with death. This parameter was used to filter the data because the data set was too large to have a broader scope. We chose to focus on the death parameter as opposed to chronic illness which is also explored in further detail in our data source. These plots are based on global data not filtered by region
+	
+-	The first plot refers to pathogens and the datapoints that were associated with death. 
+-	This looks at data from 22 different AMR pathogens
+-	From this plot we can conclude that the top five most dangerous antibiotic resistant pathogens are: 
+-	1. E.Coli (caused by contaminated water)
+-	2. K.Pneumonia- type of AMR pneumonia that affects more often older men with debilitating diseases such as respiratory diseases, diabetes, and liver disease
+3&4.    P.aeruginosa and MRSA- high risk of transmission in health care environments
+
+The second chart (this is a chart that can be changed with a dropdown menu) shows the number of datapoints associated with death by infectious syndrome. 
+-	This data important because the syndromes can aid transmission of AMR pathogens
+-	Illness and death are attributed to the multiple syndromes that AMR pathogens can produce. 
+-	This chart looks at 11 different infectious syndromes and of those the top three most associated with death were:
+-	1. Blood infections (sepsis)
+-	2. Endocarditis (inflammation of the heart)
+-	3. Urinary tract infections
+
+The third chart shows the data associated with AMR deaths by Antibiotic class. This reflects the class of antibiotic to which its resistance can be associated with death. The two that stand out are:
+1.	Resistance to one or more antibiotics- AMR pathogens associated with this category are most dangerous because they are resistant to several different antibiotics
+2.	Floroquinolones- this antibiotic has the highest rate of AMR and therefore is no longer prescribed as a first line agent and instead is given to those who are not at risk for multidrug resistance and have had resistance to other antibiotics. It is often used to treat pneumonia.
 
 The AMR data is published, and the publication can be examined at the link below. 
 
