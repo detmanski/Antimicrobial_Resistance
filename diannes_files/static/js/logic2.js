@@ -243,12 +243,11 @@ async function init() {
             datasets: [{
               label: "",
               data: "",
-              borderWidth: 1
+              backgroundColor: "",
+              borderWidth: 2.5
             }
            
-          ]},
-          
-          
+          ]},        
           options: {
             scales: {
               y: {
@@ -270,18 +269,24 @@ function updateChart() {
     trace1.data.datasets[0].data = dataSet1;
     trace1.data.labels = pathogens;
     trace1.data.datasets[0].label = "Datapoints associated with of AMR Deaths by Pathogen";
+    trace1.data.datasets[0].backgroundColor ="rgba(39,133,245,0.44)",
+    trace1.data.datasets[0].borderColor = "rgba(39,133,245,0.62";
     trace1.update(); 
   }
   else if (dataset === "1") {
     trace1.data.datasets[0].data = dataSet2;
     trace1.data.datasets[0].label = "Datapoints associated with of AMR Deaths by Antibiotic Class";
     trace1.data.labels = antibioticClass;
+    trace1.data.datasets[0].backgroundColor = "rgba(245,40,145,0.44)";
+    trace1.data.datasets[0].borderColor = "rgba(245,40,145,0.62)";
     trace1.update();
   }
   else if (dataset === "2") {
     trace1.data.datasets[0].data = dataSet3;
     trace1.data.datasets[0].label = "Datapoints associated with AMR Deaths by Infectious Syndrome";
     trace1.data.labels = infectiousSyndrome;
+    trace1.data.datasets[0].backgroundColor = "rgba(245,245,39,0.44";
+    trace1.data.datasets[0].borderColor = "rgba(245,245,39,0.62";
     trace1.update()
   };
   }
