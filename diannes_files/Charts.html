@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <header class="header">
+    <a href="#" class="logo">Bacterial Antimicrobial Resistance</a>
+    <nav class="nav-items">
+      <a href="HomePage.html">Home Page</a>
+    </nav>
+  </header>
+</head>
+    <main>
+        <style type="text/css">
+            .chartBox {
+                width: 1200px
+                
+
+            }
+        </style>
+  <body class="bg-success">
+
+    <div class="col-8 offset-2 my-5">
+      <div class="card">
+        <div class="card-body">
+          <h5>Datapoints Associated with Deaths Worldwide</h5>
+          <hr>
+          <div class = "chartBox">
+          <canvas id="myChart"></canvas>
+            <div class="selectBox">
+                <select id = "selDataset" onchange= "updateChart(this.value)">
+                    <option value= "">Please Select an Option</option>
+                    <option value ="0">Pathogens</option>
+                    <option value ="1">Antibiotic Class</option>
+                    <option value ="2">Infectious Syndrome</option>
+                </select>
+              </select>
+
+            </div>
+        </div>
+      </div>
+    </div>
+
+</div>  
+</main>
+  <footer class="footer">
+    <p>Produced by Brenda Wardhaugh, Sarah Kronheim, 
+        Dianne Etmanski & Anabel Scaranelo</p>
+    <div class="bottom-links">
+      <div class="links">
+        <span>Pages</span>
+        <a href="HomePage.html">Home Page</a>
+        <a href="Charts.html">Charts</a>
+      </div>
+    
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <script type="text/javascript" src="static/js/logic2.js"></script>
+  </footer>
+</body>
+
+</html>

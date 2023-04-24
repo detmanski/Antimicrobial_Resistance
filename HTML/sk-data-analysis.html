@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Page 1</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <header class="header">
+    <a href="#" class="logo">Bacterial Antimicrobial Resistance</a>
+    <nav class="nav-items">
+      <a href="homepage.html">Home Page</a>
+      <a href="sk-data-visualization.html">Visualization</a>
+      <a href="sk-data-analysis.html">Analysis</a>
+      <a href="Charts.html">Number of Data Points</a>
+      <a href="index_ams.html">Countries in each Region</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="well">
+      <h5>Start Year:</h5>
+      <select id="analysis_years_dropdown" onchange="analysisYearChanged(this.value)">
+      </select>
+    </div>
+    <div style="width: 80%; margin-left: auto; margin-right: auto">
+      <canvas id="spending_delta_capita_analysis"></canvas>
+    </div>
+    <div style="display: flex; justify-content: space-evenly">
+      <div>
+        <h5>Pathogen:</h5>
+        <select id="analysis_pathogen_dropdown" onchange="scatterChange()">
+        </select>
+      </div>
+      <div>
+        <h5>Antibiotic:</h5>
+        <select id="analysis_antibiotic_dropdown" onchange="scatterChange()">
+        </select>
+      </div>
+      <div>
+        <h5>Infectious Syndrome:</h5>
+        <select id="analysis_syndrome_dropdown" onchange="scatterChange()">
+        </select>
+      </div>
+    </div>
+    <div style="width: 80%; margin-left: auto; margin-right: auto">
+      <canvas id="spending_capita_amr_analysis"></canvas>
+    </div>
+    <div>
+      <h5>Start Year:</h5>
+      <select id="analysis_years_dropdown_2" onchange="scatterChange()">
+      </select>
+    </div>
+    <div style="width: 80%; margin-left: auto; margin-right: auto">
+      <canvas id="spending_delta_amr_analysis"></canvas>
+    </div>
+
+  </main>
+
+  <footer class="footer">
+    <p>Produced by Brenda Wardhaugh, Sarah Kronheim, 
+      Dianne Etmanski & Anabel Scaranelo</p>
+    <div class="bottom-links">
+      <div class="links">
+        <span>Pages</span>
+        <a href="homepage.html">Home Page</a>
+        <a href="sk-data-visualization.html">Visualization</a>
+        <a href="Charts.html">Number of Data Points</a>
+        <a href="index_ams.html">Countries in each Region</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="logicSK.js"></script>
+</body>
+
+</html>
