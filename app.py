@@ -427,7 +427,6 @@ def antibiotic_list():
     # Jsonify data and return it
     return jsonify(antibiotics_list)
 
-# ( or  or  or  or   or antibiotic class or age group)
 @app.route("/api/v1.0/amr/pathogen/<pathogen>")
 def pathogen_filter(pathogen):
     print(f"Pathogen {pathogen} filter has been viewed")
