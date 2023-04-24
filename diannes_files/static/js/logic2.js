@@ -269,6 +269,8 @@ function updateChart() {
     trace1.data.datasets[0].data = dataSet1;
     trace1.data.labels = pathogens;
     trace1.data.datasets[0].label = "Datapoints Associated with AMR Deaths by Pathogen";
+    trace1.data.datasets[0].backgroundColor = "rgba(39,163,245,0.44";
+    trace1.data.datasets[0].borderColor = "rgba(39,163,245,0.62";
     trace1.update(); 
   }
   else if (dataset === "1") {
