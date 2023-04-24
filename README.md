@@ -3,6 +3,8 @@
 ## Table of Contents
 * [Overview](#overview-and-project-proposal)
 * [Data Sources](#data-sources)
+* [ETL](#etl)
+* [Deployment](#deployment)
 * [Limitations](#limitations)
 * [Analysis and Conclusions](#analysis-and-conclusions)
 * [Flask Endpoints and Instructions](#flask-endpoints-and-instructions)
@@ -11,7 +13,7 @@
 ### Overview and Project Proposal
 We have decided to choose the topic of the healthcare industry to explore one of the major threats to the worldwide human health focusing on the analysis of the bacterial antimicrobial resistance (AMR). We decided to examine and graph data published on the global burden of antimicrobial resistance (AMR) and determine whether the regional AMR burden correlates with regional health spending. 
 
-The aim of our project is to visualize patterns and tends in AMR across different parts of the world as published in Charani et. al. We would like to show via interactive charts which region is the most impacted by each investigated pathogen in terms of drug resistance, what health spending looks like in each region, and whether the AMR burden correlates to the amount spent on healthcare in a given region.
+The aim of our project is to visualize patterns and tends in AMR across different parts of the world as published in Charani et. al. We would like to show via interactive charts which region is the most impacted by resistance to each antibiotic class, what health spending looks like in each region, and whether the AMR burden correlates to the amount spent on healthcare in a given region.
 
 The AMR data is published, and the publication can be examined at the link below. 
 
@@ -21,7 +23,27 @@ The AMR data is published, and the publication can be examined at the link below
 * The coordinates for each country were sourced from a dataset on Kaggle (https://www.kaggle.com/datasets/paultimothymooney/latitude-and-longitude-for-every-country-and-state?resource=download). 
 * The list of countries belonging to each region was scraped from the Global Health Data Exchange website (which is the site where the AMR data is posted), from the Countries page (https://ghdx.healthdata.org/countries). 
 
+## ETL
+* To extract and clean the data:
+    * Download the AMR, health spending, and country coordinate datasets and update the country_scraping.ipynb and population_healthSpending.ipynb files with the filepath to a folder containing the resulting CSV files
+    * Run the country_scraping.ipynb file
+        * This will scrape the list of countries in each region from the Global Health Data Exchange website and output a csv file with country, region, associated IDs, and country coordinates to the CSV folder, called countries.csv, for loading into a sqlite database.
+    * Run the population_healthSpending.ipynb file 
+        * This will clean the health spending dataset and output a CSV file called spending_pop.csv for loading into a sqlite database.
+* To create the database and load the data: 
+    * Change the filepath in the database_creation.py file to match the parent folder that contains the folder of CSVs produced above and the AMR data (that does not require cleaning) and an empty folder called 'database' where the sqlite database will be created.
+    * Ensure the filepaths in the database_creation.py file match the locations of each CSV file for input and the database itself.
+    * Run database_creation.py to create the sqlite database and load in the CSV files.
+* NOTE: The database is available on github, so these steps should be unnecessary to run the web pages. 
+
+## Deployment
+* The webpages pull from a Flask server, so the server must be running for the data to populate on the webpages.
+* Run the app.py file from the terminal to start the Flask server.
+* The website can now be accessed using any of the html files in the HTML folder. 
+    * Each html page links to every other page, so once one page has been opened navigation between pages can be performed using the links in the header or footer. 
+
 ## Limitations
+* The datasets utilized are large, and as such local download of CSV files is required to run data cleaning and database population files. In order to clean the data and create the database the AMR, health spending, and country coordinates datasets must be downloaded and the filepaths in the country_scraping.ipynb and population_healthSpending.ipynb files must be updated to reflect the locations of the local downloaded CSV files. 
 * The AMR data is only available by region while the health spending data is only available by country, so countries belonging to each region as defined by the Global Health Data Exchange was used to compare health spending to AMR burden. This means that any country in the health spending dataset that was not listed as part of a region in the Global Health Data Exchange is omitted from the analysis. 
 * The AMR data is only available for 2019. This means that while health spending data is available for many different years, in the analysis of discrete health spending compared to AMR burden only 2019 is considered. 
 * For the following conclusions and analysis, resistance of all pathogens to penicillin and health spending change from 2010 - 2019 were used to represent the data.
