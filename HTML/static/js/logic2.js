@@ -236,6 +236,7 @@ const dataSet3 = [skinInfections, bloodInfections, diarrhoea, endocarditis, bone
 async function init() {
 
   const ctx = document.getElementById('myChart');
+  ctx.height = 100;
       trace1 = new Chart(ctx, {
           type: 'bar',
           data: {
