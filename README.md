@@ -12,7 +12,7 @@
 
 http://detmanski.github.io/Project_3/
 
-### Overview and Project Proposal
+## Overview and Project Proposal
 We have decided to choose the topic of the healthcare industry to explore one of the major threats to the worldwide human health focusing on the analysis of the bacterial antimicrobial resistance (AMR). We decided to examine and graph data published on the global burden of antimicrobial resistance (AMR) and determine whether the regional AMR burden correlates with regional health spending. 
 
 The aim of our project is to visualize patterns and tends in AMR across different parts of the world as published in Charani et. al. We would like to show via interactive charts which region is the most impacted by resistance to each antibiotic class, what health spending looks like in each region, and whether the AMR burden correlates to the amount spent on healthcare in a given region. We aim to examine the following questions:
@@ -83,6 +83,7 @@ The AMR data is published, and the publication can be examined at the link below
     * Ensure the filepaths in the database_creation.py file match the locations of each CSV file for input and the database itself.
     * Run database_creation.py to create the sqlite database and load in the CSV files.
 * NOTE: The database is available on github, so these steps should be unnecessary to run the web pages. 
+* NOTE: Large file storage must be enabled for git in order to clone the repository due to the size of the database.
 
 ## Deployment
 * The webpages pull from a Flask server, so the server must be running for the data to populate on the webpages.
