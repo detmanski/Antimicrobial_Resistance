@@ -84,6 +84,7 @@ The AMR data is published, and the publication can be examined at the link below
     * Run database_creation.py to create the sqlite database and load in the CSV files.
 * NOTE: The database is available on github, so these steps should be unnecessary to run the web pages. 
 * NOTE: Large file storage must be enabled for git in order to clone the repository due to the size of the database.
+* NOTE: Large file storage has bandwidth restrictions. We have tried not to use bandwidth, but if anyone is unable to properly clone the sqlite database please let us know and we will provide it. 
 
 ## Deployment
 * The webpages pull from a Flask server, so the server must be running for the data to populate on the webpages.
