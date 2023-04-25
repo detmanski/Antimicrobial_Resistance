@@ -10,6 +10,8 @@
 * [Flask Endpoints and Instructions](#flask-endpoints-and-instructions)
 * [Credits](#credits)
 
+http://detmanski.github.io/Project_3/
+
 ### Overview and Project Proposal
 We have decided to choose the topic of the healthcare industry to explore one of the major threats to the worldwide human health focusing on the analysis of the bacterial antimicrobial resistance (AMR). We decided to examine and graph data published on the global burden of antimicrobial resistance (AMR) and determine whether the regional AMR burden correlates with regional health spending. 
 
