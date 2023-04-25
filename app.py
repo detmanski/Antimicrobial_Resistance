@@ -13,13 +13,13 @@ from flask_cors import CORS
 #################################################
 # Database Setup
 #################################################
-# Establishes the base filepath to find the database
+# Establishes the base filepath to find the database in local files - NOT for the version uploaded to git
 ## NOTE: This will be different for each computer
 # filepath = "C:/Users/steve/OneDrive/Desktop/Brenda/15"
-filepath = "C:/Users/kronh/OneDrive/Documents/UofTCoding_bootcamp/project_3_data"
+# filepath = "C:/Users/kronh/OneDrive/Documents/UofTCoding_bootcamp/project_3_data"
 
 # Create engine using the 'amr.sqlite' database file
-engine = create_engine(f"sqlite:///{filepath}/database/amr.sqlite")
+engine = create_engine(f"sqlite:///database/amr.sqlite")
 
 # reflect an existing database into a new model
 Base = automap_base()
