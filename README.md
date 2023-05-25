@@ -21,7 +21,7 @@ The aim of our project is to visualize patterns and tends in AMR across differen
 -	Does the amount of healthcare spending affect the risk of the population to AMR’s?
 
 
-AAntimicrobial resistance occurs when bacteria evolve to resist antibiotics . These microorganisms can adapt in a way that makes them less vulnerable to the medications that once worked effectively against them. This can happen when certain pathogens are over exposed to antibiotics over time. The drugs become less effective over time, and it becomes harder to treat infections caused by the resistant microorganism. Antimicrobial resistance is a growing and major public health concern, and it can lead to more severe and longer-lasting illnesses, higher healthcare costs/burden, or death. 
+Antimicrobial resistance occurs when bacteria evolve to resist antibiotics . These microorganisms can adapt in a way that makes them less vulnerable to the medications that once worked effectively against them. This can happen when certain pathogens are over exposed to antibiotics over time. The drugs become less effective over time, and it becomes harder to treat infections caused by the resistant microorganism. Antimicrobial resistance is a growing and major public health concern, and it can lead to more severe and longer-lasting illnesses, higher healthcare costs/burden, or death. 
 
 Some ways that AMR’s are spread are:
 -contaminated food or water (for example e.coli in lettuce cause by contaminated water sources; staph infections caused by improperly treated water in a spa)
@@ -33,12 +33,6 @@ Populations most at risk are:
 - People living in areas without reliable sources of clean water
 -Pediatric and elderly populations due to underdeveloped or weak immune systems which cannot recover from severe illness 
 -Patients within a healthcare setting: These patients have an extremely high risk and are often immunocompromised. Many people admitted to a healthcare setting display a variety of infectious syndromes and it is extremely important that they are controlled by proper cleaning, precautions and infection control measures. These populations are the most vulnerable
-
-Our aim is to examine the following questions:
--	Which Pathogens, Antibiotic Classes and Infectious syndromes are associated with death?
--	Which regions of the world are most at risk and why? 
--	Does the amount of healthcare spending affect the risk of the population to AMR’s?
-
 
 Which Pathogens, Antibiotic Classes and Infectious syndromes are associated with death?
 
